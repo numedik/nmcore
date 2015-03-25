@@ -1,0 +1,26 @@
+== Welcome to NuMedik Core Service
+
+NuMedik Core Service is based on Rails & MongoDB
+
+* Ruby version : 4.2
+* MongoDB version : 3
+* Linux Server
+
+== Installation
+
+1. clone repo
+<tt>git clone </tt>.
+
+2. bundle install
+
+3. rails s
+
+== Contributing
+
+We encourage you to contribute to NuMedik! 
+
+== Code Status
+
+== License
+
+NuMedik is released under the MIT License.
