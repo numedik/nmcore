@@ -13,9 +13,11 @@ NuMedik Core Service is based on Rails & RDBMS Database (preffered Postgresql) w
 1. clone repo
 <tt>git clone </tt>.
 
-2. bundle install
+2. Restore db structure from db/numedik.sql to any postgresql server. Configure config/database.yml respectively.
 
-3. rails s
+3. bundle install
+
+4. rails s
 
 == Contributing
 
