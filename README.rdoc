@@ -1,9 +1,11 @@
 == Welcome to NuMedik Core Service
 
-NuMedik Core Service is based on Rails & MongoDB
+NuMedik Core Service is based on Rails & RDBMS Database (preffered Postgresql) with ElasticSearch Backend indexing
 
 * Ruby version : 4.2
-* MongoDB version : 3
+* Postgresql version : 9.4
+* Elastic Search version : 1.5
+* Redis version : 2.8.19
 * Linux Server
 
 == Installation
