@@ -1,0 +1,4 @@
+en:
+  api:
+    errors:
+      invalid_session: "Invalid session"
