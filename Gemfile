@@ -32,6 +32,8 @@ gem 'capistrano-rails', group: :development
 gem 'doorkeeper'
 # in collaboration with <-- MANDATORY
 gem 'devise'
+gem 'rack-cors'
+
 # Use oauth2 client
 gem 'oauth2'
 

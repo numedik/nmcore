@@ -1,4 +1,6 @@
 Doorkeeper.configure do
+  grant_flows %w(authorization_code implicit password client_credentials)
+  
   # If user tring to access /oauth/applications,
   # check for role, if not an admin user, 
   # redirect to login
@@ -26,22 +28,9 @@ Doorkeeper.configure do
     # routes.new_user_session_path
     current_user || warden.authenticate!(:scope => :user)
   end
-  
+
   # IMPORTANT: this is for authentication using API token/secrets
-  resource_owner_from_credentials do
-    warden.authenticate!(:scope => :user)
+  resource_owner_from_credentials do |routes|
+    User.first
   end
-
-  # Access token expiration time (default 2 hours)
-  # access_token_expires_in 2.hours
-  access_token_expires_in 5.minutes
-
-  # Issue access tokens with refresh token (disabled by default)
-  use_refresh_token
-
-  # Define access token scopes for your provider
-  # For more information go to
-  # https://github.com/applicake/doorkeeper/wiki/Using-Scopes
-  default_scopes  :public
-  optional_scopes :write
 end
