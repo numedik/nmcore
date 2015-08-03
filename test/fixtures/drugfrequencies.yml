@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  name: MyString
+  multiplier: 1.5
+  disabled: false
+
+two:
+  code: MyString
+  name: MyString
+  multiplier: 1.5
+  disabled: false

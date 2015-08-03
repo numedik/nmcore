@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  name: MyString
+  add1: MyString
+  add2: MyString
+  add3: MyString
+  postcode: MyString
+  city: MyString
+  state_id: 1
+  accounttype_id: 1
+  eligibility: 9.99
+  disabled: false
+
+two:
+  code: MyString
+  name: MyString
+  add1: MyString
+  add2: MyString
+  add3: MyString
+  postcode: MyString
+  city: MyString
+  state_id: 1
+  accounttype_id: 1
+  eligibility: 9.99
+  disabled: false
