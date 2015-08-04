@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  workflowtemplate_id: 1
+  workorder_id: 1
+  sequence: 1
+
+two:
+  workflowtemplate_id: 1
+  workorder_id: 1
+  sequence: 1

@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sn: MyString
+  patient_id: 1
+  patienttype_id: 1
+  treatmentstat_id: 1
+  registrar_id: 1
+  plan_id: 1
+  discipline_id: 1
+  doctor_id: 1
+  legalcase: false
+
+two:
+  sn: MyString
+  patient_id: 1
+  patienttype_id: 1
+  treatmentstat_id: 1
+  registrar_id: 1
+  plan_id: 1
+  discipline_id: 1
+  doctor_id: 1
+  legalcase: false

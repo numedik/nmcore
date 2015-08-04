@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  purchaseorder_id: 
+  inventory_id: 
+  description: MyString
+  quantity: 9.99
+  price: 9.99
+  accountnum: MyString
+  user_id: 
+  orderunit: 9.99
+  disabled: false
+
+two:
+  purchaseorder_id: 
+  inventory_id: 
+  description: MyString
+  quantity: 9.99
+  price: 9.99
+  accountnum: MyString
+  user_id: 
+  orderunit: 9.99
+  disabled: false

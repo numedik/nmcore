@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  treatment_id: 1
+  workorder_id: 1
+  sequenceorder: 1
+  assigner_id: 1
+  assignee_id: 1
+  workflowstat_id: 1
+
+two:
+  treatment_id: 1
+  workorder_id: 1
+  sequenceorder: 1
+  assigner_id: 1
+  assignee_id: 1
+  workflowstat_id: 1

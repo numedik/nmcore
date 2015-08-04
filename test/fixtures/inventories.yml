@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  name: MyString
+  scientificname: MyString
+  inventorytype_id: 
+  drugtype_id: 
+  minstock: 1
+  maxstock: 1
+  orderstock: 1
+  strength: 9.99
+  drugstrength_id: 
+  dosage: 1
+  drugdosage_id: 
+  drougroute_id: 
+  drugfrequency_id: 
+  duration: 9.99
+  drugduration_id: 
+  drugprocedure_id: 
+  prn: false
+  disabled: false
+
+two:
+  code: MyString
+  name: MyString
+  scientificname: MyString
+  inventorytype_id: 
+  drugtype_id: 
+  minstock: 1
+  maxstock: 1
+  orderstock: 1
+  strength: 9.99
+  drugstrength_id: 
+  dosage: 1
+  drugdosage_id: 
+  drougroute_id: 
+  drugfrequency_id: 
+  duration: 9.99
+  drugduration_id: 
+  drugprocedure_id: 
+  prn: false
+  disabled: false

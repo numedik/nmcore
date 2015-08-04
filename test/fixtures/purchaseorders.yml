@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ponumber: MyString
+  vendor_id: 
+  podate: 2015-08-04
+  user_id: 
+  accountnum: MyString
+  postat_id: 
+  department: MyString
+  expecteddate: 2015-08-04
+
+two:
+  ponumber: MyString
+  vendor_id: 
+  podate: 2015-08-04
+  user_id: 
+  accountnum: MyString
+  postat_id: 
+  department: MyString
+  expecteddate: 2015-08-04

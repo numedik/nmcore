@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  store_id: 
+  purchaseorder_id: 
+  initialquantity: 9.99
+  stockquantity: 9.99
+  user_id: 
+  warehousestat: false
+  orderunit: 9.99
+  orderprice: 9.99
+  batchnum: MyString
+  expireddate: 2015-08-04
+  accountnum: MyString
+  disabled: false
+
+two:
+  store_id: 
+  purchaseorder_id: 
+  initialquantity: 9.99
+  stockquantity: 9.99
+  user_id: 
+  warehousestat: false
+  orderunit: 9.99
+  orderprice: 9.99
+  batchnum: MyString
+  expireddate: 2015-08-04
+  accountnum: MyString
+  disabled: false

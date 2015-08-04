@@ -6,6 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+#rails g model Patient mrn mykadno oldic passport birthcert fullname gender_id:integer add1 add2 add3 city postcode state_id:integer nationality_id:integer homephone mobilephone email dob:date defaultplan_id:integer defaultaccount_id:integer profession employer employerphone religion_id:integer marital_id:integer race_id:integer bloodtype_id:integer patientstat_id:integer remarkgeneral:text remarkallergy:text remarkmedicalhistory:text remarkfamilyhistory:text rnstat_id:integer designation_id:integer relativename relationrelation relativeadd relativetel registrar_id:integer 
+
+#rails g model Account code name add1 add2 add3 city postcode state_id:integer accountype_id:integer eligibility:decimal disabled:boolean
+
+#rails g model Treatment sn patient_id:integer patienttype_id:integer treatmentstat_id:integer registrar_id:integer plan_id:integer discipline_id:integer doctor_id:integer legalcase:boolean diagosis:text 
+
 User.create(username: 'abh', email: 'abh@numedik.com', password: 'abh' )
 
 Store.create(id:1, code: 'MS', name: 'Main Store')
@@ -319,6 +325,8 @@ Billitemstat.create( id: 4, code: 'S', name: 'Suspend', disabled: false)
 
 Postat.create( id: 1, code: 'O', name: 'Order', disabled: false)
 Postat.create( id: 2, code: 'A', name: 'Acquired', disabled: false)
+Postat.create( id: 3, code: 'D', name: 'Draft', disabled: false)
+Postat.create( id: 4, code: 'C', name: 'Cancelled', disabled: false)
 
 Drugprocedure.create( id: 1, code: 'A', name: 'Selepas Makan', disabled: false)
 Drugprocedure.create( id: 2, code: 'B', name: 'Sebelum Makan', disabled: false)
@@ -334,3 +342,42 @@ Pricetype.create( id: 1, code: 'W', name: 'Warehouse', disabled: false)
 Pricetype.create( id: 2, code: 'X', name: 'General', disabled: false)
 Pricetype.create( id: 4, code: 'R', name: 'Lab Report', disabled: false)
 
+Treatmentnotetype.create( id: 1, code: 'H', name: 'HOPI', disabled: false)
+Treatmentnotetype.create( id: 2, code: 'N', name: 'Nursing Note', disabled: false)
+Treatmentnotetype.create( id: 3, code: 'L', name: 'Lab Note', disabled: false)
+
+Workorder.create( id: 1, code: 'REG', name: 'Registration', disabled: false)
+Workorder.create( id: 2, code: 'TRI', name: 'Triage', disabled: false)
+Workorder.create( id: 3, code: 'DOC', name: 'Doctor Consultation', disabled: false)
+Workorder.create( id: 4, code: 'MOF', name: 'Medical Officer', disabled: false)
+Workorder.create( id: 5, code: 'PHA', name: 'Pharmacy', disabled: false)
+Workorder.create( id: 6, code: 'LAB', name: 'Lab', disabled: false)
+Workorder.create( id: 7, code: 'TRM', name: 'Treatment Room', disabled: false)
+Workorder.create( id: 8, code: 'BIL', name: 'Billing', disabled: false)
+
+Workflowtemplate.create( id: 1, code: 'DEF', name: 'Default Template', disabled: false)
+
+Workflowtemplateitem.create( id: 1, workflowtemplate_id: 1, workorder_id: 1,  sequence: 1)
+Workflowtemplateitem.create( id: 2, workflowtemplate_id: 1, workorder_id: 3,  sequence: 2)
+Workflowtemplateitem.create( id: 3, workflowtemplate_id: 1, workorder_id: 5,  sequence: 3)
+Workflowtemplateitem.create( id: 4, workflowtemplate_id: 1, workorder_id: 8,  sequence: 4)
+
+Workflowstat.create( id: 1, code: 'N', name: 'New', disabled: false)
+Workflowstat.create( id: 2, code: 'C', name: 'Completed', disabled: false)
+
+Role.create( id: 1, code: 'SYS', name: 'System Admin', disabled: false)
+Role.create( id: 2, code: 'ADM', name: 'Administrator', disabled: false)
+Role.create( id: 3, code: 'MD', name: 'Medical Doctor', disabled: false)
+Role.create( id: 4, code: 'CS', name: 'Cashier', disabled: false)
+Role.create( id: 5, code: 'PH', name: 'Pharmacist', disabled: false)
+Role.create( id: 6, code: 'CL', name: 'Clerk', disabled: false)
+Role.create( id: 7, code: 'NR', name: 'Staff Nurse', disabled: false)
+
+Userstat.create( id: 1, code: 'A', name: 'Active', disabled: false)
+Userstat.create( id: 2, code: 'D', name: 'Disabled', disabled: false)
+
+Department.create( id: 1, code: 'M', name: 'Medical', disabled: false)
+
+Inventorytype.create( id: 1, code: 'DRG', name: 'Drug', disabled: false)
+Inventorytype.create( id: 2, code: 'DIS', name: 'Disposible Item', disabled: false)
+Inventorytype.create( id: 3, code: 'NUT', name: 'Nutritions', disabled: false)

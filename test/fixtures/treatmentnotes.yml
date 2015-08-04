@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  treatment_id: 1
+  treatmentnotetype_id: 1
+  note: MyText
+  user_id: 1
+  disabled: false
+
+two:
+  treatment_id: 1
+  treatmentnotetype_id: 1
+  note: MyText
+  user_id: 1
+  disabled: false
