@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150804125319) do
+ActiveRecord::Schema.define(version: 20150805075145) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "code",           limit: 255
@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(version: 20150804125319) do
     t.datetime "updated_at",                                                         null: false
   end
 
-  add_index "accounts", ["accounttype_id"], name: "fk_rails_58aab7eece", using: :btree
-  add_index "accounts", ["state_id"], name: "fk_rails_a1dd8dd7a4", using: :btree
+  add_index "accounts", ["accounttype_id"], name: "index_accounts_on_accounttype_id", using: :btree
+  add_index "accounts", ["state_id"], name: "index_accounts_on_state_id", using: :btree
 
   create_table "accounttypes", force: :cascade do |t|
     t.string   "code",       limit: 255
@@ -40,6 +40,24 @@ ActiveRecord::Schema.define(version: 20150804125319) do
     t.datetime "updated_at",                             null: false
   end
 
+  create_table "billings", force: :cascade do |t|
+    t.string   "refnum",         limit: 255
+    t.integer  "patient_id",     limit: 4
+    t.integer  "treatment_id",   limit: 4
+    t.integer  "billingstat_id", limit: 4
+    t.string   "remark",         limit: 255
+    t.datetime "closetime"
+    t.string   "closeremark",    limit: 255
+    t.integer  "user_id",        limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "billings", ["billingstat_id"], name: "index_billings_on_billingstat_id", using: :btree
+  add_index "billings", ["patient_id"], name: "index_billings_on_patient_id", using: :btree
+  add_index "billings", ["treatment_id"], name: "index_billings_on_treatment_id", using: :btree
+  add_index "billings", ["user_id"], name: "index_billings_on_user_id", using: :btree
+
   create_table "billingstats", force: :cascade do |t|
     t.string   "code",       limit: 255
     t.string   "name",       limit: 255
@@ -47,6 +65,38 @@ ActiveRecord::Schema.define(version: 20150804125319) do
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
   end
+
+  create_table "billitems", force: :cascade do |t|
+    t.integer  "billing_id",      limit: 4
+    t.integer  "patienttype_id",  limit: 4
+    t.integer  "price_id",        limit: 4
+    t.decimal  "adjustedprice",               precision: 7, scale: 2
+    t.integer  "quantity",        limit: 4,                           default: 1
+    t.integer  "user_id",         limit: 4
+    t.integer  "billitemstat_id", limit: 4
+    t.integer  "plan_id",         limit: 4
+    t.integer  "chargegroup_id",  limit: 4
+    t.integer  "account_id",      limit: 4
+    t.integer  "gstcode_id",      limit: 4
+    t.boolean  "inpackage",       limit: 1,                           default: false
+    t.string   "editedname",      limit: 255
+    t.string   "debitsn",         limit: 255
+    t.boolean  "reversed",        limit: 1,                           default: false
+    t.integer  "warehouse_id",    limit: 4
+    t.datetime "created_at",                                                          null: false
+    t.datetime "updated_at",                                                          null: false
+  end
+
+  add_index "billitems", ["account_id"], name: "index_billitems_on_account_id", using: :btree
+  add_index "billitems", ["billing_id"], name: "index_billitems_on_billing_id", using: :btree
+  add_index "billitems", ["billitemstat_id"], name: "index_billitems_on_billitemstat_id", using: :btree
+  add_index "billitems", ["chargegroup_id"], name: "index_billitems_on_chargegroup_id", using: :btree
+  add_index "billitems", ["gstcode_id"], name: "index_billitems_on_gstcode_id", using: :btree
+  add_index "billitems", ["patienttype_id"], name: "index_billitems_on_patienttype_id", using: :btree
+  add_index "billitems", ["plan_id"], name: "index_billitems_on_plan_id", using: :btree
+  add_index "billitems", ["price_id"], name: "index_billitems_on_price_id", using: :btree
+  add_index "billitems", ["user_id"], name: "index_billitems_on_user_id", using: :btree
+  add_index "billitems", ["warehouse_id"], name: "index_billitems_on_warehouse_id", using: :btree
 
   create_table "billitemstats", force: :cascade do |t|
     t.string   "code",       limit: 255
@@ -83,9 +133,9 @@ ActiveRecord::Schema.define(version: 20150804125319) do
   create_table "departments", force: :cascade do |t|
     t.string   "code",       limit: 255
     t.string   "name",       limit: 255
-    t.boolean  "disabled",   limit: 1
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.boolean  "disabled",   limit: 1,   default: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
   create_table "designations", force: :cascade do |t|
@@ -115,7 +165,7 @@ ActiveRecord::Schema.define(version: 20150804125319) do
   create_table "drugdurations", force: :cascade do |t|
     t.string   "code",       limit: 255
     t.string   "name",       limit: 255
-    t.integer  "multiplier", limit: 4
+    t.integer  "multiplier", limit: 4,   default: 1
     t.boolean  "disabled",   limit: 1,   default: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
@@ -124,7 +174,7 @@ ActiveRecord::Schema.define(version: 20150804125319) do
   create_table "drugfrequencies", force: :cascade do |t|
     t.string   "code",       limit: 255
     t.string   "name",       limit: 255
-    t.float    "multiplier", limit: 24
+    t.float    "multiplier", limit: 24,  default: 1.0
     t.boolean  "disabled",   limit: 1,   default: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
@@ -165,6 +215,16 @@ ActiveRecord::Schema.define(version: 20150804125319) do
   create_table "genders", force: :cascade do |t|
     t.string   "code",       limit: 255
     t.string   "name",       limit: 255
+    t.boolean  "disabled",   limit: 1,   default: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  create_table "gstcodes", force: :cascade do |t|
+    t.string   "code",       limit: 255
+    t.string   "name",       limit: 255
+    t.string   "gsttype",    limit: 255
+    t.integer  "rate",       limit: 4
     t.boolean  "disabled",   limit: 1,   default: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
@@ -211,14 +271,6 @@ ActiveRecord::Schema.define(version: 20150804125319) do
     t.datetime "updated_at",                             null: false
   end
 
-  create_table "labattachmentstats", force: :cascade do |t|
-    t.string   "code",       limit: 255
-    t.string   "name",       limit: 255
-    t.boolean  "disabled",   limit: 1,   default: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-  end
-
   create_table "labcharges", force: :cascade do |t|
     t.string   "code",       limit: 255
     t.string   "name",       limit: 255
@@ -227,12 +279,58 @@ ActiveRecord::Schema.define(version: 20150804125319) do
     t.datetime "updated_at",                             null: false
   end
 
-  create_table "labresultstats", force: :cascade do |t|
+  create_table "labitems", force: :cascade do |t|
+    t.string   "code",        limit: 255
+    t.string   "name",        limit: 255
+    t.string   "unit",        limit: 255
+    t.string   "normalvalue", limit: 255
+    t.boolean  "disabled",    limit: 1,   default: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
+
+  create_table "labrequestitems", force: :cascade do |t|
+    t.integer  "labrequest_id", limit: 4
+    t.integer  "labitem_id",    limit: 4
+    t.text     "remark",        limit: 65535
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "labrequestitems", ["labitem_id"], name: "index_labrequestitems_on_labitem_id", using: :btree
+  add_index "labrequestitems", ["labrequest_id"], name: "index_labrequestitems_on_labrequest_id", using: :btree
+
+  create_table "labrequests", force: :cascade do |t|
+    t.integer  "treatment_id", limit: 4
+    t.integer  "user_id",      limit: 4
+    t.datetime "requestdate"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "labrequests", ["treatment_id"], name: "index_labrequests_on_treatment_id", using: :btree
+  add_index "labrequests", ["user_id"], name: "index_labrequests_on_user_id", using: :btree
+
+  create_table "labresults", force: :cascade do |t|
+    t.integer  "labrequestitem_id", limit: 4
+    t.integer  "labtemplate_id",    limit: 4
+    t.text     "html",              limit: 65535
+    t.text     "json",              limit: 65535
+    t.string   "attachmenturl",     limit: 255
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "labresults", ["labrequestitem_id"], name: "index_labresults_on_labrequestitem_id", using: :btree
+  add_index "labresults", ["labtemplate_id"], name: "index_labresults_on_labtemplate_id", using: :btree
+
+  create_table "labtemplates", force: :cascade do |t|
     t.string   "code",       limit: 255
     t.string   "name",       limit: 255
-    t.boolean  "disabled",   limit: 1,   default: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.text     "html",       limit: 65535
+    t.boolean  "disabled",   limit: 1,     default: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   create_table "maritals", force: :cascade do |t|
@@ -335,16 +433,16 @@ ActiveRecord::Schema.define(version: 20150804125319) do
     t.datetime "updated_at",                         null: false
   end
 
-  add_index "patients", ["bloodtype_id"], name: "fk_rails_b6b06b20d5", using: :btree
-  add_index "patients", ["designation_id"], name: "fk_rails_8e79c7c91a", using: :btree
-  add_index "patients", ["gender_id"], name: "fk_rails_957f6eb6f6", using: :btree
-  add_index "patients", ["marital_id"], name: "fk_rails_4489b4df6b", using: :btree
-  add_index "patients", ["nationality_id"], name: "fk_rails_9d39f100d7", using: :btree
-  add_index "patients", ["patientstat_id"], name: "fk_rails_2d477f70aa", using: :btree
-  add_index "patients", ["race_id"], name: "fk_rails_03135d451a", using: :btree
-  add_index "patients", ["religion_id"], name: "fk_rails_01ec61436d", using: :btree
-  add_index "patients", ["rnstat_id"], name: "fk_rails_4ed29fe52c", using: :btree
-  add_index "patients", ["state_id"], name: "fk_rails_1634476f8a", using: :btree
+  add_index "patients", ["bloodtype_id"], name: "index_patients_on_bloodtype_id", using: :btree
+  add_index "patients", ["designation_id"], name: "index_patients_on_designation_id", using: :btree
+  add_index "patients", ["gender_id"], name: "index_patients_on_gender_id", using: :btree
+  add_index "patients", ["marital_id"], name: "index_patients_on_marital_id", using: :btree
+  add_index "patients", ["nationality_id"], name: "index_patients_on_nationality_id", using: :btree
+  add_index "patients", ["patientstat_id"], name: "index_patients_on_patientstat_id", using: :btree
+  add_index "patients", ["race_id"], name: "index_patients_on_race_id", using: :btree
+  add_index "patients", ["religion_id"], name: "index_patients_on_religion_id", using: :btree
+  add_index "patients", ["rnstat_id"], name: "index_patients_on_rnstat_id", using: :btree
+  add_index "patients", ["state_id"], name: "index_patients_on_state_id", using: :btree
 
   create_table "patientstats", force: :cascade do |t|
     t.string   "code",       limit: 255
@@ -395,6 +493,25 @@ ActiveRecord::Schema.define(version: 20150804125319) do
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
   end
+
+  create_table "prices", force: :cascade do |t|
+    t.string   "code",             limit: 255
+    t.string   "name",             limit: 255
+    t.integer  "plan_id",          limit: 4
+    t.decimal  "actualcost",                   precision: 7, scale: 2
+    t.decimal  "recommendedprice",             precision: 7, scale: 2
+    t.integer  "pricetype_id",     limit: 4
+    t.integer  "gstcode_id",       limit: 4
+    t.integer  "chargegroup_id",   limit: 4
+    t.boolean  "reducestock",      limit: 1,                           default: false
+    t.datetime "created_at",                                                           null: false
+    t.datetime "updated_at",                                                           null: false
+  end
+
+  add_index "prices", ["chargegroup_id"], name: "index_prices_on_chargegroup_id", using: :btree
+  add_index "prices", ["gstcode_id"], name: "index_prices_on_gstcode_id", using: :btree
+  add_index "prices", ["plan_id"], name: "index_prices_on_plan_id", using: :btree
+  add_index "prices", ["pricetype_id"], name: "index_prices_on_pricetype_id", using: :btree
 
   create_table "pricetypes", force: :cascade do |t|
     t.string   "code",       limit: 255
@@ -479,9 +596,9 @@ ActiveRecord::Schema.define(version: 20150804125319) do
     t.datetime "updated_at",                                         null: false
   end
 
-  add_index "treatmentnotes", ["treatment_id"], name: "fk_rails_fd5694290f", using: :btree
-  add_index "treatmentnotes", ["treatmentnotetype_id"], name: "fk_rails_e5bce8852e", using: :btree
-  add_index "treatmentnotes", ["user_id"], name: "fk_rails_6e09c5e99d", using: :btree
+  add_index "treatmentnotes", ["treatment_id"], name: "index_treatmentnotes_on_treatment_id", using: :btree
+  add_index "treatmentnotes", ["treatmentnotetype_id"], name: "index_treatmentnotes_on_treatmentnotetype_id", using: :btree
+  add_index "treatmentnotes", ["user_id"], name: "index_treatmentnotes_on_user_id", using: :btree
 
   create_table "treatmentnotetypes", force: :cascade do |t|
     t.string   "code",       limit: 255
@@ -505,11 +622,11 @@ ActiveRecord::Schema.define(version: 20150804125319) do
     t.datetime "updated_at",                                   null: false
   end
 
-  add_index "treatments", ["discipline_id"], name: "fk_rails_47b9ddafb9", using: :btree
-  add_index "treatments", ["patient_id"], name: "fk_rails_7c4caf6301", using: :btree
-  add_index "treatments", ["patienttype_id"], name: "fk_rails_c3021028c3", using: :btree
-  add_index "treatments", ["plan_id"], name: "fk_rails_b302217242", using: :btree
-  add_index "treatments", ["treatmentstat_id"], name: "fk_rails_0f239be8f6", using: :btree
+  add_index "treatments", ["discipline_id"], name: "index_treatments_on_discipline_id", using: :btree
+  add_index "treatments", ["patient_id"], name: "index_treatments_on_patient_id", using: :btree
+  add_index "treatments", ["patienttype_id"], name: "index_treatments_on_patienttype_id", using: :btree
+  add_index "treatments", ["plan_id"], name: "index_treatments_on_plan_id", using: :btree
+  add_index "treatments", ["treatmentstat_id"], name: "index_treatments_on_treatmentstat_id", using: :btree
 
   create_table "treatmentstats", force: :cascade do |t|
     t.string   "code",       limit: 255
@@ -542,13 +659,13 @@ ActiveRecord::Schema.define(version: 20150804125319) do
     t.string   "last_sign_in_ip",        limit: 255
   end
 
-  add_index "users", ["department_id"], name: "fk_rails_f29bf9cdf2", using: :btree
-  add_index "users", ["discipline_id"], name: "fk_rails_e9312fd4ff", using: :btree
+  add_index "users", ["department_id"], name: "index_users_on_department_id", using: :btree
+  add_index "users", ["discipline_id"], name: "index_users_on_discipline_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["role_id"], name: "fk_rails_642f17018b", using: :btree
-  add_index "users", ["userstat_id"], name: "fk_rails_eae5faa079", using: :btree
-  add_index "users", ["workorder_id"], name: "fk_rails_c030f47d73", using: :btree
+  add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
+  add_index "users", ["userstat_id"], name: "index_users_on_userstat_id", using: :btree
+  add_index "users", ["workorder_id"], name: "index_users_on_workorder_id", using: :btree
 
   create_table "userstats", force: :cascade do |t|
     t.string   "code",       limit: 255
@@ -624,9 +741,9 @@ ActiveRecord::Schema.define(version: 20150804125319) do
     t.datetime "updated_at",                null: false
   end
 
-  add_index "workflows", ["treatment_id"], name: "fk_rails_5b996f4be8", using: :btree
-  add_index "workflows", ["workflowstat_id"], name: "fk_rails_b89ac562a5", using: :btree
-  add_index "workflows", ["workorder_id"], name: "fk_rails_10f6e01c5b", using: :btree
+  add_index "workflows", ["treatment_id"], name: "index_workflows_on_treatment_id", using: :btree
+  add_index "workflows", ["workflowstat_id"], name: "index_workflows_on_workflowstat_id", using: :btree
+  add_index "workflows", ["workorder_id"], name: "index_workflows_on_workorder_id", using: :btree
 
   create_table "workflowstats", force: :cascade do |t|
     t.string   "code",       limit: 255
@@ -644,8 +761,8 @@ ActiveRecord::Schema.define(version: 20150804125319) do
     t.datetime "updated_at",                    null: false
   end
 
-  add_index "workflowtemplateitems", ["workflowtemplate_id"], name: "fk_rails_221c595f59", using: :btree
-  add_index "workflowtemplateitems", ["workorder_id"], name: "fk_rails_e7564b2c00", using: :btree
+  add_index "workflowtemplateitems", ["workflowtemplate_id"], name: "index_workflowtemplateitems_on_workflowtemplate_id", using: :btree
+  add_index "workflowtemplateitems", ["workorder_id"], name: "index_workflowtemplateitems_on_workorder_id", using: :btree
 
   create_table "workflowtemplates", force: :cascade do |t|
     t.string   "code",       limit: 255
@@ -665,6 +782,20 @@ ActiveRecord::Schema.define(version: 20150804125319) do
 
   add_foreign_key "accounts", "accounttypes"
   add_foreign_key "accounts", "states"
+  add_foreign_key "billings", "billingstats"
+  add_foreign_key "billings", "patients"
+  add_foreign_key "billings", "treatments"
+  add_foreign_key "billings", "users"
+  add_foreign_key "billitems", "accounts"
+  add_foreign_key "billitems", "billings"
+  add_foreign_key "billitems", "billitemstats"
+  add_foreign_key "billitems", "chargegroups"
+  add_foreign_key "billitems", "gstcodes"
+  add_foreign_key "billitems", "patienttypes"
+  add_foreign_key "billitems", "plans"
+  add_foreign_key "billitems", "prices"
+  add_foreign_key "billitems", "users"
+  add_foreign_key "billitems", "warehouses"
   add_foreign_key "inventories", "drugdosages"
   add_foreign_key "inventories", "drugdurations"
   add_foreign_key "inventories", "drugfrequencies"
@@ -673,6 +804,12 @@ ActiveRecord::Schema.define(version: 20150804125319) do
   add_foreign_key "inventories", "drugstrengths"
   add_foreign_key "inventories", "drugtypes"
   add_foreign_key "inventories", "inventorytypes"
+  add_foreign_key "labrequestitems", "labitems"
+  add_foreign_key "labrequestitems", "labrequests"
+  add_foreign_key "labrequests", "treatments"
+  add_foreign_key "labrequests", "users"
+  add_foreign_key "labresults", "labrequestitems"
+  add_foreign_key "labresults", "labtemplates"
   add_foreign_key "patients", "bloodtypes"
   add_foreign_key "patients", "designations"
   add_foreign_key "patients", "genders"
@@ -686,6 +823,10 @@ ActiveRecord::Schema.define(version: 20150804125319) do
   add_foreign_key "poitems", "inventories"
   add_foreign_key "poitems", "purchaseorders"
   add_foreign_key "poitems", "users"
+  add_foreign_key "prices", "chargegroups"
+  add_foreign_key "prices", "gstcodes"
+  add_foreign_key "prices", "plans"
+  add_foreign_key "prices", "pricetypes"
   add_foreign_key "purchaseorders", "postats"
   add_foreign_key "purchaseorders", "users"
   add_foreign_key "purchaseorders", "vendors"

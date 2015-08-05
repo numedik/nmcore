@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  name: MyString
+  plan_id: 
+  actualcost: 9.99
+  recommendedprice: 9.99
+  pricetype_id: 
+  gstcode_id: 
+  chargegroup_id: 
+  reducestock: false
+
+two:
+  code: MyString
+  name: MyString
+  plan_id: 
+  actualcost: 9.99
+  recommendedprice: 9.99
+  pricetype_id: 
+  gstcode_id: 
+  chargegroup_id: 
+  reducestock: false

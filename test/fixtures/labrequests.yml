@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  treatment_id: 
+  user_id: 
+  requestdate: 2015-08-05 14:11:24
+
+two:
+  treatment_id: 
+  user_id: 
+  requestdate: 2015-08-05 14:11:24

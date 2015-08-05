@@ -3,7 +3,7 @@ class CreateDrugfrequencies < ActiveRecord::Migration
     create_table :drugfrequencies do |t|
       t.string :code
       t.string :name
-      t.float :multiplier
+      t.float :multiplier, :default => 1
       t.boolean :disabled, :default => false
 
       t.timestamps null: false

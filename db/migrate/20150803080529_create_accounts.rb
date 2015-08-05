@@ -8,8 +8,8 @@ class CreateAccounts < ActiveRecord::Migration
       t.string :add3
       t.string :postcode
       t.string :city
-      t.integer :state_id
-      t.integer :accounttype_id
+      t.references :state, index: true, foreign_key: true #t.integer :state_id
+      t.references :accounttype, index: true, foreign_key: true #t.integer :accounttype_id
       t.decimal :eligibility, :precision => 8, :scale => 2
       t.boolean :disabled, :default => false
 

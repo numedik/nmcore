@@ -1,9 +1,10 @@
-class CreateDrugdurations < ActiveRecord::Migration
+class CreateLabitems < ActiveRecord::Migration
   def change
-    create_table :drugdurations do |t|
+    create_table :labitems do |t|
       t.string :code
       t.string :name
-      t.integer :multiplier, :default => 1
+      t.string :unit
+      t.string :normalvalue
       t.boolean :disabled, :default => false
 
       t.timestamps null: false

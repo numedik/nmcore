@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  labrequestitem_id: 
+  labtemplate_id: 
+  html: MyText
+  json: MyText
+  attachmenturl: MyString
+
+two:
+  labrequestitem_id: 
+  labtemplate_id: 
+  html: MyText
+  json: MyText
+  attachmenturl: MyString
