@@ -719,3 +719,8 @@ Gstcode.create( id: 24, code: 'TX-CG', name: 'Capital goods acquired. (BOX 16)',
 
 Documentstat.create( id: 1, code: 'A', name: 'Active', disabled: false)
 Documentstat.create( id: 2, code: 'X', name: 'Cancelled', disabled: false)
+
+Icdtype.create( id: 1, code: 'ICD10', name: 'ICD10 Universal', disabled: false)
+Icdtype.create( id: 2, code: 'ICD10-CM', name: 'ICD10 Clinical Modification', disabled: false)
+Icdtype.create( id: 3, code: 'ICD10-PCS', name: 'ICD10 Procedure Coding System', disabled: false)
+

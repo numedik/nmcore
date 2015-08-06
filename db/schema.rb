@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150806043135) do
+ActiveRecord::Schema.define(version: 20150806084003) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "code",           limit: 255
@@ -377,6 +377,27 @@ ActiveRecord::Schema.define(version: 20150806043135) do
     t.boolean  "disabled",   limit: 1,   default: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+  end
+
+  create_table "mykadrecords", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "mykadnum",    limit: 255
+    t.string   "gender",      limit: 255
+    t.string   "oldic",       limit: 255
+    t.string   "dob",         limit: 255
+    t.string   "birthplace",  limit: 255
+    t.string   "citizenship", limit: 255
+    t.string   "race",        limit: 255
+    t.string   "religion",    limit: 255
+    t.string   "add1",        limit: 255
+    t.string   "add2",        limit: 255
+    t.string   "add3",        limit: 255
+    t.string   "postcode",    limit: 255
+    t.string   "city",        limit: 255
+    t.string   "state",       limit: 255
+    t.string   "picture",     limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "nationalities", force: :cascade do |t|
