@@ -21,5 +21,11 @@ Rails.application.routes.draw do
       resources :profiles
       get '/me' => "credentials#me"
     end
+  
   end
+  
+  scope :lookup do
+    get 'workorder' => "lookup#workorder" 
+  end
+  
 end
