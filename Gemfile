@@ -22,9 +22,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use Unicorn as the app server
-# gem 'unicorn'
-
 # Use Capistrano for deployment
 gem 'capistrano-rails', group: :development
 
@@ -44,8 +41,13 @@ group :development, :test do
   gem 'spring'
 end
 
+group :production do
+  gem 'unicorn'
+  gem 'unicorn-worker-killer'
+  gem 'dalli'
+end
+
 gem 'bootstrap-sass', '~> 3.3.4'
 gem 'sass-rails', '>= 3.2'
 gem 'select2-rails'
-gem 'unicorn'
 
