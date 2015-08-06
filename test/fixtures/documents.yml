@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  serialnum: MyString
+  documenttype_id: 
+  patient_id: 
+  user_id: 
+  html: MyText
+  documentstat_id: 
+  remark: MyString
+
+two:
+  serialnum: MyString
+  documenttype_id: 
+  patient_id: 
+  user_id: 
+  html: MyText
+  documentstat_id: 
+  remark: MyString

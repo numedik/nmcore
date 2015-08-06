@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150805075145) do
+ActiveRecord::Schema.define(version: 20150806043135) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "code",           limit: 255
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20150805075145) do
     t.integer  "user_id",        limit: 4
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.date     "invoicedate"
   end
 
   add_index "billings", ["billingstat_id"], name: "index_billings_on_billingstat_id", using: :btree
@@ -85,6 +86,9 @@ ActiveRecord::Schema.define(version: 20150805075145) do
     t.integer  "warehouse_id",    limit: 4
     t.datetime "created_at",                                                          null: false
     t.datetime "updated_at",                                                          null: false
+    t.decimal  "debit",                       precision: 7, scale: 2
+    t.decimal  "credit",                      precision: 7, scale: 2
+    t.decimal  "tax",                         precision: 7, scale: 2
   end
 
   add_index "billitems", ["account_id"], name: "index_billitems_on_account_id", using: :btree
@@ -152,6 +156,40 @@ ActiveRecord::Schema.define(version: 20150805075145) do
     t.boolean  "disabled",   limit: 1,   default: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.string   "serialnum",       limit: 255
+    t.integer  "documenttype_id", limit: 4
+    t.integer  "patient_id",      limit: 4
+    t.integer  "user_id",         limit: 4
+    t.text     "html",            limit: 65535
+    t.integer  "documentstat_id", limit: 4
+    t.string   "remark",          limit: 255
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "documents", ["documentstat_id"], name: "index_documents_on_documentstat_id", using: :btree
+  add_index "documents", ["documenttype_id"], name: "index_documents_on_documenttype_id", using: :btree
+  add_index "documents", ["patient_id"], name: "index_documents_on_patient_id", using: :btree
+  add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
+
+  create_table "documentstats", force: :cascade do |t|
+    t.string   "code",       limit: 255
+    t.string   "name",       limit: 255
+    t.boolean  "disabled",   limit: 1,   default: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  create_table "documenttypes", force: :cascade do |t|
+    t.string   "code",       limit: 255
+    t.string   "name",       limit: 255
+    t.text     "html",       limit: 65535
+    t.boolean  "disabled",   limit: 1,     default: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   create_table "drugdosages", force: :cascade do |t|
@@ -796,6 +834,10 @@ ActiveRecord::Schema.define(version: 20150805075145) do
   add_foreign_key "billitems", "prices"
   add_foreign_key "billitems", "users"
   add_foreign_key "billitems", "warehouses"
+  add_foreign_key "documents", "documentstats"
+  add_foreign_key "documents", "documenttypes"
+  add_foreign_key "documents", "patients"
+  add_foreign_key "documents", "users"
   add_foreign_key "inventories", "drugdosages"
   add_foreign_key "inventories", "drugdurations"
   add_foreign_key "inventories", "drugfrequencies"

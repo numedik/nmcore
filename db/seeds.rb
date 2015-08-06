@@ -717,3 +717,5 @@ Gstcode.create( id: 22, code: 'GP', name: 'Purchase transactions which disregard
 Gstcode.create( id: 23, code: 'AJP', name: 'Any adjustment made to Input Tax e.g.: Bad Debt Relief & other input tax adjustment.', rate: 6, gsttype: 'PURCHASE', disabled: false)
 Gstcode.create( id: 24, code: 'TX-CG', name: 'Capital goods acquired. (BOX 16)', rate: 6, gsttype: 'PURCHASE', disabled: false)
 
+Documentstat.create( id: 1, code: 'A', name: 'Active', disabled: false)
+Documentstat.create( id: 2, code: 'X', name: 'Cancelled', disabled: false)
