@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   end
   
   scope :lookup do
-    get 'workorder' => "lookup#workorder" 
+    get ':lookupmodel' => "lookup#dblookup" 
   end
   
 end
