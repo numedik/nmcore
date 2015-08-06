@@ -14,10 +14,10 @@ class HomeController < ApplicationController
     # BEGIN Basic Usage flow
     client ||= OAuth2::Client.new(
       appId, appSecret, 
-      :site => "http://localhost:3000"
+      :site => "https://core.numedik.com"
     )
     url = client.auth_code.authorize_url(
-      :redirect_uri => 'http://localhost:3000/callbacks/numedik'
+      :redirect_uri => 'https://core.numedik.com/callbacks/numedik'
     )
     redirect_to url # will redirect the user to our API's sign in page
     # END Basic Usage Flow
