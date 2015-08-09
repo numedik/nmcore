@@ -22,7 +22,8 @@
     </ol>
   </div>
   <div class="row">
-
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
     <table class="table table-hover table-bordered table-striped">
       <thead>
           <tr>
@@ -54,5 +55,6 @@
       </tbody>
     </table>
 
+    <%= link_to :logout, destroy_user_session_path, :method => :delete %>
   </div>
 </div>

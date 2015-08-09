@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150806084003) do
+ActiveRecord::Schema.define(version: 20150809073328) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "code",           limit: 255
@@ -266,6 +266,14 @@ ActiveRecord::Schema.define(version: 20150806084003) do
     t.boolean  "disabled",   limit: 1,   default: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+  end
+
+  create_table "icdtypes", force: :cascade do |t|
+    t.string   "code",       limit: 255
+    t.string   "name",       limit: 255
+    t.boolean  "disabled",   limit: 1
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "inventories", force: :cascade do |t|
