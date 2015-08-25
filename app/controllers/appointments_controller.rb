@@ -1,12 +1,16 @@
 class AppointmentsController < ApplicationController
   def index
     @appointment = Appointment.all
+    
+    respond_to do |format|
+      format.html 
+      format.json { render json: @appointment }
+    end
   end
 
   def show
   end
 
-  # GET /users/new
   def new
     @appointment = Appointment.new
   end
@@ -27,7 +31,7 @@ class AppointmentsController < ApplicationController
       end
     end
   end
-  
+
   def update
     respond_to do |format|
       if @appointment.update(appointment_params)

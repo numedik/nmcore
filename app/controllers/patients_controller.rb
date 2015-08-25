@@ -1,12 +1,22 @@
 class PatientsController < ApplicationController
   def index
     @patient = Patient.all
+    
+    respond_to do |format|
+      format.html 
+      format.json { render json: @patient }
+    end
   end
 
   def show
+    @patient = Patient.all
+    
+    respond_to do |format|
+      format.html 
+      format.json { render json: @patient }
+    end
   end
 
-  # GET /users/new
   def new
     @patient = Patient.new
   end
@@ -15,12 +25,13 @@ class PatientsController < ApplicationController
   end
 
   def create
-    @patient = Patient.new(patient_params)
-
+    params.permit!
+    @patient = Patient.create(patient_params)
+    
     respond_to do |format|
       if @patient.save
         format.html { redirect_to @patient, notice: 'Patient was successfully created.' }
-        format.json { render :show, status: :created, location: @patient }
+        format.json { render action: 'show', status: :created, location: @patient }
       else
         format.html { render :new }
         format.json { render json: @patient.errors, status: :unprocessable_entity }
@@ -48,9 +59,6 @@ class PatientsController < ApplicationController
     end
   end
 
-  def register_new_patient
-  end
-
   def search_patient
   end
 
@@ -64,6 +72,12 @@ class PatientsController < ApplicationController
   end
 
   def save_detail_patient
+  end
+  
+  private
+
+  def patient_params
+    params.require(:patient).permit(:mrn, :mykadno, :oldic,:passport,:birthcert,:fullname,:gender_id,:add1,:add2,:add3,:city,:postcode,:state_id,:nationality_id,:homephone,:mobilephone,:email,:dob,:defaultplan_id,:defaultaccount_id,:profession,:employer,:employerphone,:religion_id,:marital_id,:race_id,:bloodtype_id,:patientstat_id,:remarkgeneral,:remarkallergy,:remarkmedicalhistory,:remarkfamilyhistory,:rnstat_id ,:designation_id,:relativename,:relationname,:relativerelation,:relativeadd,:relativetel,:registrat_id)
   end
 
 end

@@ -1,12 +1,16 @@
 class TreatmentsController < ApplicationController
   def index
     @treatment = Treatment.all
+    
+    respond_to do |format|
+      format.html 
+      format.json { render json: @warehouse }
+    end
   end
 
   def show
   end
 
-  # GET /users/new
   def new
     @treatment = Treatment.new
   end
