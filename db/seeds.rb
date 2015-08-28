@@ -727,3 +727,6 @@ Icdtype.create( id: 3, code: 'ICD10-PCS', name: 'ICD10 Procedure Coding System',
 Medicationstat.create( id: 1, code: 'O', name: 'Order', disabled: false)
 Medicationstat.create( id: 2, code: 'G', name: 'Given', disabled: false)
 Medicationstat.create( id: 3, code: 'C', name: 'Cancelled', disabled: false)
+
+Audittype.create( id: 1, code: 'AUTH', name: 'Authentication Audit', disabled: false)
+Audittype.create( id: 2, code: 'GENERAL', name: 'General Audit', disabled: false)

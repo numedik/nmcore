@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  audittype_id: 
+  user_id: 
+  ipaddress: MyString
+  info: MyText
+
+two:
+  audittype_id: 
+  user_id: 
+  ipaddress: MyString
+  info: MyText

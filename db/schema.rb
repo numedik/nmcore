@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150827055245) do
+ActiveRecord::Schema.define(version: 20150828105940) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "code",           limit: 255
@@ -33,6 +33,26 @@ ActiveRecord::Schema.define(version: 20150827055245) do
   add_index "accounts", ["state_id"], name: "index_accounts_on_state_id", using: :btree
 
   create_table "accounttypes", force: :cascade do |t|
+    t.string   "code",       limit: 255
+    t.string   "name",       limit: 255
+    t.boolean  "disabled",   limit: 1,   default: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  create_table "audits", force: :cascade do |t|
+    t.integer  "audittype_id", limit: 4
+    t.integer  "user_id",      limit: 4
+    t.string   "ipaddress",    limit: 255
+    t.text     "info",         limit: 65535
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "audits", ["audittype_id"], name: "index_audits_on_audittype_id", using: :btree
+  add_index "audits", ["user_id"], name: "index_audits_on_user_id", using: :btree
+
+  create_table "audittypes", force: :cascade do |t|
     t.string   "code",       limit: 255
     t.string   "name",       limit: 255
     t.boolean  "disabled",   limit: 1,   default: false
@@ -267,6 +287,21 @@ ActiveRecord::Schema.define(version: 20150827055245) do
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
   end
+
+  create_table "icds", force: :cascade do |t|
+    t.string   "code",         limit: 255
+    t.string   "name",         limit: 255
+    t.string   "parentcode",   limit: 255
+    t.integer  "level",        limit: 4
+    t.text     "info",         limit: 65535
+    t.string   "icdtype_code", limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "icds", ["code"], name: "index_icds_on_code", using: :btree
+  add_index "icds", ["icdtype_code"], name: "index_icds_on_icdtype_code", using: :btree
+  add_index "icds", ["parentcode"], name: "index_icds_on_parentcode", using: :btree
 
   create_table "icdtypes", force: :cascade do |t|
     t.string   "code",       limit: 255
@@ -698,6 +733,21 @@ ActiveRecord::Schema.define(version: 20150827055245) do
     t.datetime "updated_at",                             null: false
   end
 
+  create_table "treatmenticds", force: :cascade do |t|
+    t.integer  "treatment_id",      limit: 4
+    t.string   "cause_code",        limit: 255
+    t.string   "procedure_code",    limit: 255
+    t.string   "desease_code",      limit: 255
+    t.string   "causeofdeath_code", limit: 255
+    t.string   "remark",            limit: 255
+    t.integer  "user_id",           limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "treatmenticds", ["treatment_id"], name: "index_treatmenticds_on_treatment_id", using: :btree
+  add_index "treatmenticds", ["user_id"], name: "index_treatmenticds_on_user_id", using: :btree
+
   create_table "treatmentnotes", force: :cascade do |t|
     t.integer  "treatment_id",         limit: 4
     t.integer  "treatmentnotetype_id", limit: 4
@@ -894,6 +944,8 @@ ActiveRecord::Schema.define(version: 20150827055245) do
 
   add_foreign_key "accounts", "accounttypes"
   add_foreign_key "accounts", "states"
+  add_foreign_key "audits", "audittypes"
+  add_foreign_key "audits", "users"
   add_foreign_key "billings", "billingstats"
   add_foreign_key "billings", "patients"
   add_foreign_key "billings", "treatments"
@@ -958,6 +1010,8 @@ ActiveRecord::Schema.define(version: 20150827055245) do
   add_foreign_key "purchaseorders", "postats"
   add_foreign_key "purchaseorders", "users"
   add_foreign_key "purchaseorders", "vendors"
+  add_foreign_key "treatmenticds", "treatments"
+  add_foreign_key "treatmenticds", "users"
   add_foreign_key "treatmentnotes", "treatmentnotetypes"
   add_foreign_key "treatmentnotes", "treatments"
   add_foreign_key "treatmentnotes", "users"

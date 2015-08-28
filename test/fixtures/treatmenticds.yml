@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  treatment_id: 
+  cause_code: MyString
+  procedure_code: MyString
+  desease_code: MyString
+  causeofdeath_code: MyString
+  remark: MyString
+  user_id: 
+
+two:
+  treatment_id: 
+  cause_code: MyString
+  procedure_code: MyString
+  desease_code: MyString
+  causeofdeath_code: MyString
+  remark: MyString
+  user_id: 
