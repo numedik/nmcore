@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  treatment_id: 
+  patienttype_id: 
+  inventory_id: 
+  user_id: 
+  strength: 9.99
+  drugstrength_id: 
+  dosage: 1
+  drugdosage_id: 
+  drugroute_id: 
+  drugfrequency_id: 
+  duration: 9.99
+  drugduration_id: 
+  quantity: 1
+  drugprocedure_id: 
+  drugprn_id: 
+  instruction: MyString
+  remark: MyString
+  medicationstat_id: 
+  billitem_id: 
+
+two:
+  treatment_id: 
+  patienttype_id: 
+  inventory_id: 
+  user_id: 
+  strength: 9.99
+  drugstrength_id: 
+  dosage: 1
+  drugdosage_id: 
+  drugroute_id: 
+  drugfrequency_id: 
+  duration: 9.99
+  drugduration_id: 
+  quantity: 1
+  drugprocedure_id: 
+  drugprn_id: 
+  instruction: MyString
+  remark: MyString
+  medicationstat_id: 
+  billitem_id: 

@@ -6,11 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-#rails g model Patient mrn mykadno oldic passport birthcert fullname gender_id:integer add1 add2 add3 city postcode state_id:integer nationality_id:integer homephone mobilephone email dob:date defaultplan_id:integer defaultaccount_id:integer profession employer employerphone religion_id:integer marital_id:integer race_id:integer bloodtype_id:integer patientstat_id:integer remarkgeneral:text remarkallergy:text remarkmedicalhistory:text remarkfamilyhistory:text rnstat_id:integer designation_id:integer relativename relationrelation relativeadd relativetel registrar_id:integer 
+#rails g model Patient mrn mykadno oldic passport birthcert fullname gender_id:integer add1 add2 add3 city postcode state_id:integer nationality_id:integer homephone mobilephone email dob:date defaultplan_id:integer defaultaccount_id:integer profession employer employerphone religion_id:integer marital_id:integer race_id:integer bloodtype_id:integer patientstat_id:integer remarkgeneral:text remarkallergy:text remarkmedicalhistory:text remarkfamilyhistory:text rnstat_id:integer designation_id:integer relativename relationrelation relativeadd relativetel registrar_id:integer
 
 #rails g model Account code name add1 add2 add3 city postcode state_id:integer accountype_id:integer eligibility:decimal disabled:boolean
 
-#rails g model Treatment sn patient_id:integer patienttype_id:integer treatmentstat_id:integer registrar_id:integer plan_id:integer discipline_id:integer doctor_id:integer legalcase:boolean diagosis:text 
+#rails g model Treatment sn patient_id:integer patienttype_id:integer treatmentstat_id:integer registrar_id:integer plan_id:integer discipline_id:integer doctor_id:integer legalcase:boolean diagosis:text
 
 User.create(username: 'abh', email: 'abh@numedik.com', password: 'abh' )
 
@@ -724,3 +724,6 @@ Icdtype.create( id: 1, code: 'ICD10', name: 'ICD10 Universal', disabled: false)
 Icdtype.create( id: 2, code: 'ICD10-CM', name: 'ICD10 Clinical Modification', disabled: false)
 Icdtype.create( id: 3, code: 'ICD10-PCS', name: 'ICD10 Procedure Coding System', disabled: false)
 
+Medicationstat.create( id: 1, code: 'O', name: 'Order', disabled: false)
+Medicationstat.create( id: 2, code: 'G', name: 'Given', disabled: false)
+Medicationstat.create( id: 3, code: 'C', name: 'Cancelled', disabled: false)

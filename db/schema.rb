@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150809073328) do
+ActiveRecord::Schema.define(version: 20150827055245) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "code",           limit: 255
@@ -380,6 +380,51 @@ ActiveRecord::Schema.define(version: 20150809073328) do
   end
 
   create_table "maritals", force: :cascade do |t|
+    t.string   "code",       limit: 255
+    t.string   "name",       limit: 255
+    t.boolean  "disabled",   limit: 1,   default: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  create_table "medications", force: :cascade do |t|
+    t.integer  "treatment_id",      limit: 4
+    t.integer  "patienttype_id",    limit: 4
+    t.integer  "inventory_id",      limit: 4
+    t.integer  "user_id",           limit: 4
+    t.decimal  "strength",                      precision: 5, scale: 2
+    t.integer  "drugstrength_id",   limit: 4
+    t.integer  "dosage",            limit: 4
+    t.integer  "drugdosage_id",     limit: 4
+    t.integer  "drugroute_id",      limit: 4
+    t.integer  "drugfrequency_id",  limit: 4
+    t.decimal  "duration",                      precision: 5, scale: 2
+    t.integer  "drugduration_id",   limit: 4
+    t.integer  "quantity",          limit: 4
+    t.integer  "drugprocedure_id",  limit: 4
+    t.boolean  "prn",               limit: 1,                           default: false
+    t.string   "instruction",       limit: 255
+    t.string   "remark",            limit: 255
+    t.integer  "medicationstat_id", limit: 4
+    t.integer  "billitem_id",       limit: 4
+    t.datetime "created_at",                                                            null: false
+    t.datetime "updated_at",                                                            null: false
+  end
+
+  add_index "medications", ["billitem_id"], name: "index_medications_on_billitem_id", using: :btree
+  add_index "medications", ["drugdosage_id"], name: "index_medications_on_drugdosage_id", using: :btree
+  add_index "medications", ["drugduration_id"], name: "index_medications_on_drugduration_id", using: :btree
+  add_index "medications", ["drugfrequency_id"], name: "index_medications_on_drugfrequency_id", using: :btree
+  add_index "medications", ["drugprocedure_id"], name: "index_medications_on_drugprocedure_id", using: :btree
+  add_index "medications", ["drugroute_id"], name: "index_medications_on_drugroute_id", using: :btree
+  add_index "medications", ["drugstrength_id"], name: "index_medications_on_drugstrength_id", using: :btree
+  add_index "medications", ["inventory_id"], name: "index_medications_on_inventory_id", using: :btree
+  add_index "medications", ["medicationstat_id"], name: "index_medications_on_medicationstat_id", using: :btree
+  add_index "medications", ["patienttype_id"], name: "index_medications_on_patienttype_id", using: :btree
+  add_index "medications", ["treatment_id"], name: "index_medications_on_treatment_id", using: :btree
+  add_index "medications", ["user_id"], name: "index_medications_on_user_id", using: :btree
+
+  create_table "medicationstats", force: :cascade do |t|
     t.string   "code",       limit: 255
     t.string   "name",       limit: 255
     t.boolean  "disabled",   limit: 1,   default: false
@@ -881,6 +926,18 @@ ActiveRecord::Schema.define(version: 20150809073328) do
   add_foreign_key "labrequests", "users"
   add_foreign_key "labresults", "labrequestitems"
   add_foreign_key "labresults", "labtemplates"
+  add_foreign_key "medications", "billitems"
+  add_foreign_key "medications", "drugdosages"
+  add_foreign_key "medications", "drugdurations"
+  add_foreign_key "medications", "drugfrequencies"
+  add_foreign_key "medications", "drugprocedures"
+  add_foreign_key "medications", "drugroutes"
+  add_foreign_key "medications", "drugstrengths"
+  add_foreign_key "medications", "inventories"
+  add_foreign_key "medications", "medicationstats"
+  add_foreign_key "medications", "patienttypes"
+  add_foreign_key "medications", "treatments"
+  add_foreign_key "medications", "users"
   add_foreign_key "patients", "bloodtypes"
   add_foreign_key "patients", "designations"
   add_foreign_key "patients", "genders"
