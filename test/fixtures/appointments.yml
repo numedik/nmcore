@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  patient_id: 
+  bookdate: 2015-08-28
+  start: 2015-08-28 19:12:55
+  end: 2015-08-28 19:12:55
+  appointmentstat_id: 
+  remark: MyString
+
+two:
+  patient_id: 
+  bookdate: 2015-08-28
+  start: 2015-08-28 19:12:55
+  end: 2015-08-28 19:12:55
+  appointmentstat_id: 
+  remark: MyString

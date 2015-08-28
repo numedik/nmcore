@@ -730,3 +730,11 @@ Medicationstat.create( id: 3, code: 'C', name: 'Cancelled', disabled: false)
 
 Audittype.create( id: 1, code: 'AUTH', name: 'Authentication Audit', disabled: false)
 Audittype.create( id: 2, code: 'GENERAL', name: 'General Audit', disabled: false)
+
+Appointmentstat.create( id: 1, code: 'N', name: 'New', disabled: false)
+Appointmentstat.create( id: 2, code: 'C', name: 'Cancelled', disabled: false)
+
+Runningnumber.create( id: 1, code: 'RN', name: 'Medical Record Number', running: 1)
+Runningnumber.create( id: 2, code: 'SN', name: 'Visit Number', running: 1)
+Runningnumber.create( id: 3, code: 'BILL', name: 'Billing Number', running: 1)
+Runningnumber.create( id: 4, code: 'PAY', name: 'Payment Number', running: 1)
