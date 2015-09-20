@@ -1,5 +1,7 @@
 class PatientsController < ApplicationController
 
+  before_filter :doorkeeper_authorize!
+
   def search_patient
   end
 
