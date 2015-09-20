@@ -16,4 +16,4 @@ test:
 
 production:
   <<: *default
-  database: numedik_production
+  database: numedik_development
