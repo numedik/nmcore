@@ -5,7 +5,7 @@ pid "/var/www/#{appname}/pids/unicorn.pid"
 stderr_path "/var/www/#{appname}/log/unicorn.log"
 stdout_path "/var/www/#{appname}/log/unicorn.log"
 listen "/tmp/unicorn.#{appname}.sock", :backlog => 64
-listen 8080, :tcp_nopush => true
+listen 8084, :tcp_nopush => true
 
 worker_processes Integer(ENV["WEB_CONCURRENCY"] || 2)
 timeout 60
