@@ -4,7 +4,7 @@ json.info do
   json.params params
 end
 
-json.result @rs do |rs|
+json.results @rs do |rs|
   json.id rs.id
   json.mrn rs.mrn
   json.mykadno rs.mykadno || rs.oldic || rs.passport || rs.birthcert
