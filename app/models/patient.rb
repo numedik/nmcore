@@ -38,4 +38,9 @@ class Patient < ActiveRecord::Base
   has_many :treatments
   has_many :billings
 
+  def if_active_patient?
+    sn = Treatment.where(:patient_id => self.id , :treatmentstat_id => Treatmentstat.where(:code=>'N').first.id ).first.sn rescue ''
+    sn = 'SN'+sn if sn != ''
+    return sn
+  end
 end
