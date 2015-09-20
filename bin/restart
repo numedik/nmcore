@@ -1,9 +1,8 @@
 case "$1" in
 	unicorn)
 		unicorn_pid=`cat /var/www/nmcore/pids/unicorn.pid`
-		unicorn_syspid=`ps ax | grep unicorn_rails | grep -v grep | awk '{print $1}'`
 		echo "Restarting NMCore Unicorn ($unicorn_pid)"
-		kill -9 $unicorn_syspid $unicorn_pid 
+		kill -9 $unicorn_pid 
 		unicorn_rails -c config/unicorn.rb -D -E production
 		exit 0
 		;;
