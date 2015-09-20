@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   use_doorkeeper
   # You can have the root of your site routed with "root"
   root 'home#landing'
-  
+
   controller :home do
     get '/home/doorkeeper'
   end
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :patients
     scope :patients do
       get '/search-patient' => 'patients#search_patient'
-      get '/search-patient-autosuggest' => 'patients#search_patient_autosuggest'
+      get '/search-bar/:searchkeyword' => 'patients#search_bar'
       get '/load-mykad-picture/:imagename' => 'patients#load_mykad_picture'
       get '/print-detail-patient/:patientid' => 'patients#print_detail_patient'
     end
