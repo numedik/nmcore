@@ -36,14 +36,14 @@ class CreatePatients < ActiveRecord::Migration
       t.references :rnstat, index: true, foreign_key: true #t.integer :rnstat_id
       t.references :designation, index: true, foreign_key: true #t.integer :designation_id
       t.string :relativename
-      t.string :relationrelation
+      t.string :relativerelation
       t.string :relativeadd
       t.string :relativetel
       t.integer :registrar_id
 
       t.timestamps null: false
     end
-    
-    
+
+
   end
 end

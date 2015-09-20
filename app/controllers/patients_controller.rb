@@ -7,7 +7,11 @@ class PatientsController < ApplicationController
 
   def search_bar
     @rs = Patient.search params[:searchkeyword], :load => true
+    render format: :json
+  end
 
+  def patient_info
+    @rs = Patient.find params[:patientid]
     render format: :json
   end
 

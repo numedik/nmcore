@@ -13,10 +13,12 @@ Rails.application.routes.draw do
       get ':lookupmodel' => "lookup#dblookup"
     end
 
-    resources :patients
+    #resources :patients
     scope :patients do
-      get '/search-patient' => 'patients#search_patient'
       get '/search-bar/:searchkeyword' => 'patients#search_bar'
+      get '/:patientid' => 'patients#patient_info'
+
+      get '/search-patient' => 'patients#search_patient'
       get '/load-mykad-picture/:imagename' => 'patients#load_mykad_picture'
       get '/print-detail-patient/:patientid' => 'patients#print_detail_patient'
     end
