@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
       @reason ||= access_token[7] + access_token[5].minutes < Time.now ?
         "access_token has expired" : nil
     else 
-      @reason = ex[:description]
+      @reason = ex[:error][:description]
     end
       
     @reason ||= "Unkown Error"
