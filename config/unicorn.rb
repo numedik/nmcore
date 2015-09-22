@@ -1,13 +1,13 @@
 # config/unicorn.rb
 appname = "nmcore"
-working_directory "/var/www/#{appname}"
-pid "/var/www/#{appname}/pids/unicorn.pid"
-stderr_path "/var/www/#{appname}/log/unicorn.log"
-stdout_path "/var/www/#{appname}/log/unicorn.log"
-listen "/tmp/unicorn.#{appname}.sock", :backlog => 64
-listen 8084, :tcp_nopush => true
+working_directory "/#{appname}"
+pid "/#{appname}/pids/unicorn.pid"
+stderr_path "/#{appname}/log/unicorn.log"
+stdout_path "/#{appname}/log/unicorn.log"
+#listen "/tmp/unicorn.#{appname}.sock", :backlog => 64
+listen 3000, :tcp_nopush => true
 
-worker_processes Integer(ENV["WEB_CONCURRENCY"] || 2)
+worker_processes Integer(ENV["WEB_CONCURRENCY"] || 4)
 timeout 60
 preload_app true
 

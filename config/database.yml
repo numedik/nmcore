@@ -16,4 +16,4 @@ test:
 
 production:
   <<: *default
-  database: numedik_development
+  database: <%= ENV['NMCORE_DB_NAME'] %>
