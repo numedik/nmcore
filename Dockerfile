@@ -16,9 +16,10 @@ RUN apt-get update -qq \
 		libcurl4-openssl-dev  --no-install-recommends
 
 # Clean up APT when done.
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    truncate -s 0 /var/log/*log
 
-ENV nmid XXXX 
+ENV nmid XXXX
 
 ENV NMCORE_DATABASE_USER XXXX
 ENV NMCORE_DATABASE_PASSWORD XXXX
@@ -29,29 +30,35 @@ ENV SECRET_KEY_BASE XXXX
 ENV NMCORE_DB_NAME nmcore_$nmid
 ENV WEB_CONCURRENCY 2
 ENV RAILS_ENV production
+#ENV GEM_HOME /ruby_gems/2.4.8
+#ENV PATH /ruby_gems/2.4.8/bin:$PATH
+
 
 RUN su -c 'mkdir -p /home/app/{bundle,bundle-cache,webapp}'
 
-WORKDIR /home/app/webapp
+ENV APP_HOME /home/app/webapp
+WORKDIR $APP_HOME
 
-# Install bundle (assuming bundle packaged to vendor/cache)
 
-COPY / /home/app/webapp
-RUN bundle install
 RUN mkdir -p log tmp public
 
 # set permissions
-RUN chown --recursive app log tmp public
+RUN chown --recursive root log tmp public
 
+ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
+  BUNDLE_JOBS=4 \
+  BUNDLE_PATH=/ruby_gems/2.4.8
 
-# set permissions
-RUN chown --recursive app log tmp public
+ADD Gemfile* $APP_HOME/
+RUN bundle install
+ADD . $APP_HOME
+
 
 RUN bundle exec rake assets:precompile --trace
 
 RUN bundle exec rake db:create && RAILS_ENV=production bundle exec rake db:schema:load && RAILS_ENV=production bundle exec rake db:seed
 
-EXPOSE 3000 
+EXPOSE 3000
 #CMD ["rails","server","-b","0.0.0.0","-e","production"]
-CMD ["unicorn_rails","-c","config/unicorn.rb","-E","production"]
-
+#CMD ["unicorn_rails","-c","config/unicorn.rb","-E","production"]
+CMD ./script/start

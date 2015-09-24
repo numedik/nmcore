@@ -1,0 +1,9 @@
+web:
+  build: .
+  command: bin/rails server --port 3000 --binding 0.0.0.0 -e production
+  ports:
+    - "3000:3000"
+  volumes:
+    - .:/ruby_gems/2.4.8
+  volumes_from:
+    - gems-2.4.8
