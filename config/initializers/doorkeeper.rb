@@ -7,6 +7,7 @@ Doorkeeper.configure do
 
   # This block will be called to check whether the resource owner is authenticated or not.
   resource_owner_authenticator do
+    session[:redirect_uri] = request.fullpath
     current_user || redirect_to(new_user_session_url)
   end
 
@@ -104,4 +105,11 @@ Doorkeeper.configure do
 
   # WWW-Authenticate Realm (default "Doorkeeper").
   # realm "Doorkeeper"
+end
+
+puts 'Warning, overriding Doorkeeper URL validation'
+Doorkeeper::OAuth::PreAuthorization.class_eval do
+  def validate_redirect_uri
+    return true # or change it to test redirect_uri for *.domain.com
+  end
 end
