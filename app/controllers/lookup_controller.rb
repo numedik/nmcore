@@ -107,7 +107,11 @@ class LookupController < ApplicationController
         @rs = Workflowtemplate.all
 
     when 'workflowtemplateitem'
-        @rs = Workflowtemplateitem.all
+        if params[:tplid]
+          @rs = Workflowtemplateitem.find_by(workflowtemplate_id: params[:tplid])
+        else
+          @rs = Workflowtemplateitem.all
+        end
 
     when 'workflowstat'
         @rs = Workflowstat.all
