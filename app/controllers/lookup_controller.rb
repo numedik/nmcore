@@ -108,11 +108,11 @@ class LookupController < ApplicationController
 
     when 'workflowtemplateitem'
         if params[:tplid]
-          @rs = Workflowtemplateitem.includes(:workflowtemplate)
+          @rs = Workflowtemplateitem.includes(:workorder)
                   .where( workflowtemplate_id: params[:tplid] ).each.map do |tplitem|
           { 
             id: tplitem.id, 
-            workflowtemplate: tplitem.workflowtemplate, 
+            workorder: tplitem.workorder, 
             sequence: tplitem.sequence,
             created_at: tplitem.created_at,
             updated_at: tplitem.updated_at
