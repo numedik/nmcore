@@ -108,7 +108,16 @@ class LookupController < ApplicationController
 
     when 'workflowtemplateitem'
         if params[:tplid]
-          @rs = Workflowtemplateitem.where(workflowtemplate_id: params[:tplid])
+          @rs = Workflowtemplateitem.includes(:workflowtemplate)
+                  .where( workflowtemplate_id: params[:tplid] ).each.map do |tplitem|
+          { 
+            id: tplitem.id, 
+            workflowtemplate: tplitem.workflowtemplate, 
+            sequence: tplitem.sequence,
+            created_at: tplitem.created_at,
+            updated_at: tplitem.updated_at
+          }
+          end
         else
           @rs = Workflowtemplateitem.all
         end
