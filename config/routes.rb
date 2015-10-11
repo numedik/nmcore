@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   controller :home do
     get '/home/doorkeeper'
   end
+  
+  controller :callbacks do
+    get '/callbacks/nmclis' => 'callbacks#nmclis'
+  end
+  
   scope '/api' do
     scope :lookup do
       get ':lookupmodel' => "lookup#dblookup"
@@ -36,7 +41,7 @@ Rails.application.routes.draw do
 
     resources :warehouses
     scope :warehouses do
-
+      get '/search-bar/warehouse/:searchkeyword' => 'warehouses#search_bar'
     end
 
     resources :billings
