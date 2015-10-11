@@ -41,7 +41,7 @@ Rails.application.routes.draw do
 
     resources :warehouses
     scope :warehouses do
-      get '/search-bar/warehouse/:searchkeyword' => 'warehouses#search_bar'
+      get '/search-bar/:searchkeyword' => 'warehouses#search_bar'
     end
 
     resources :billings
