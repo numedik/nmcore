@@ -8,12 +8,12 @@ json.results @rs do |rs|
   json.id rs.id
   json.name rs.name
   json.code rs.code
-  json.drug {
+  json.drug do
     type: rs.drugtype_id,
     strength: rs.drugstrength_id,
     dosage: rs.drugdosage_id,
     route: rs.drugroute_id,
     duration: rs.drugduration_id,
     procedure: rs.drugprocedure_id
-  }
+  end
 end
