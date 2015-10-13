@@ -9,11 +9,11 @@ json.results @rs do |rs|
   json.name rs.name
   json.code rs.code
   json.drug({ 
-    type: rs.drugtype.name,
-    strength: [rs.strength, rs.drugstrength.name],
-    dosage: [rs.dosage, rs.drugdosage.name],
-    route: rs.drugroute.name,
-    duration: [rs.duration, rs.drugduration.name],
-    procedure: rs.drugprocedure.name
+    type: rs.drugtype.try(:name),
+    strength: [rs.strength, rs.drugstrength.try(:name)],
+    dosage: [rs.dosage, rs.drugdosage.try(:name)],
+    route: rs.drugroute.try(:name),
+    duration: [rs.duration, rs.drugduration.try(:name)],
+    procedure: rs.drugprocedure.try(:name)
   })
 end
