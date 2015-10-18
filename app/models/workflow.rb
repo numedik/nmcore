@@ -6,4 +6,12 @@ class Workflow < ActiveRecord::Base
   belongs_to :workorder
   has_one :workflowstat
   has_one :treatment
+  
+  
+  before_create :init_default
+
+  private
+    def init_default
+      self.workflowstat_id = Workflowstat.where(:code => 'N').first.id
+    end
 end
