@@ -20,17 +20,6 @@ Rails.application.routes.draw do
 
     #list of module
     
-    #pms - NUMEDIK PHARMACY MANAGEMENT SYSTEM (PMS)
-    #bms - NUMEDIK BILLING MANAGEMENT SYSTEM (BMS)
-    #opms - NUMEDIK OUTPATIENT MANAGEMENT SYSTEM (OPMS) / workorder
-    #docs - NUMEDIK DOCUMENT SYSTEM (DocS)
-    #mass - NUMEDIK MESSAGING SYSTEM (MASS)
-    #tca - NUMEDIK APPOINTMENT SCHEDULING SYSTEM (TCA)
-    #labs - NUMEDIK LABS MANAGEMENT SYSTEM (LabS)
-    #qms - NUMEDIK QUEUE MANAGEMENT SYSTEM (QMS)
-    #web - NUMEDIK WEB PORTAL (WEB)
-    
-    #dpis - NUMEDIK DIGITAL PATIENT INFORMATION SYSTEM (DPIS)
     scope 'dpis' do
       get '/search-bar/:searchkeyword' => 'patients#search_bar'
       get '/:patientid' => 'patients#patient_info'
@@ -40,6 +29,10 @@ Rails.application.routes.draw do
       get '/print-detail-patient/:patientid' => 'patients#print_detail_patient'
     end
 
+    scope 'adt' do 
+      post '/admit' => 'adt#admit'  
+    end
+    
     scope 'opms' do
       get '/active-treatment-patient' => 'treatments#active_treatment_patient'
       get '/list-treatment-patient' => 'treatments#list_past_treatment'
