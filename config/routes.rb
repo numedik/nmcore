@@ -18,8 +18,20 @@ Rails.application.routes.draw do
       get ':lookupmodel' => "lookup#dblookup"
     end
 
-    #resources :patients
-    scope :patients do
+    #list of module
+    
+    #pms - NUMEDIK PHARMACY MANAGEMENT SYSTEM (PMS)
+    #bms - NUMEDIK BILLING MANAGEMENT SYSTEM (BMS)
+    #opms - NUMEDIK OUTPATIENT MANAGEMENT SYSTEM (OPMS) / workorder
+    #docs - NUMEDIK DOCUMENT SYSTEM (DocS)
+    #mass - NUMEDIK MESSAGING SYSTEM (MASS)
+    #tca - NUMEDIK APPOINTMENT SCHEDULING SYSTEM (TCA)
+    #labs - NUMEDIK LABS MANAGEMENT SYSTEM (LabS)
+    #qms - NUMEDIK QUEUE MANAGEMENT SYSTEM (QMS)
+    #web - NUMEDIK WEB PORTAL (WEB)
+    
+    #dpis - NUMEDIK DIGITAL PATIENT INFORMATION SYSTEM (DPIS)
+    scope 'dpis' do
       get '/search-bar/:searchkeyword' => 'patients#search_bar'
       get '/:patientid' => 'patients#patient_info'
 
@@ -28,29 +40,24 @@ Rails.application.routes.draw do
       get '/print-detail-patient/:patientid' => 'patients#print_detail_patient'
     end
 
-    resources :treatments
-    scope :treatments do
+    scope 'opms' do
       get '/active-treatment-patient' => 'treatments#active_treatment_patient'
       get '/list-treatment-patient' => 'treatments#list_past_treatment'
     end
 
-    resources :appointments
-    scope :appointments do
+    scope 'tca' do
 
     end
 
-    resources :warehouses
-    scope :warehouses do
+    scope 'pms' do
       get '/search-bar/:searchkeyword' => 'warehouses#search_bar'
     end
 
-    resources :billings
-    scope :billings do
+    scope 'bms' do
 
     end
 
-    resources :labs
-    scope :labs do
+    scope 'labs' do
 
     end
 

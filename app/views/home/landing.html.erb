@@ -1,60 +1,82 @@
 <script type="text/javascript">
     $(document).ready(function() {
-        $(".apitypelist").select2();
+        //$(".apitypelist").select2();
+      $('#apitypelist').change(function(){
+        window.location.assign("/?apitype="+$(this).val());
+      });
     });
 </script>
 
 <div class="container">
   <div class="row">
-    <h1>NuMedik Core API</h1>
+    <h1><%=t('title')%></h1>
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-success">
+            <%=t('coreinfo.id')%> : <span class="btn btn-success btn-xs"><%=NMID%></span> | 
+            <%=t('coreinfo.es')%> : <%=link_to Tire::Configuration.url,Tire::Configuration.url,html_options = {:target => '_blank'}%> | 
+            <%=t('coreinfo.url')%> : <%= link_to @coreurl,@coreurl,html_options = {:target => '_blank'} %>
+          <%= link_to :logout, destroy_user_session_path, :method => :delete, :class => 'pull-right btn btn-xs btn-danger' %>
+        </li>
+        
+      </ul>
+
     <ol class="breadcrumb">
       <li><a href="#">Home</a></li>
       <li><a href="#">API</a></li>
-      <li class="active">Patient Information System(PIS) API</li>
-      <li class="pull-right">
-        <select class="apitypelist">
-          <option value="PIS">Patient Information System(PIS) API</option>
-          <option value="DOC">Document Management (DoMS) API</option>
-          <option value="Fine">Financial Infomation (FinE) API</option>
-        </select>
-        <button type="button" class="btn-xs btn btn-warning">Change</button>
+      <li>
+      <div class="pull-right">
+        <%= select_tag "apitypelist", options_for_select(
+          { 
+            'DIGITAL PATIENT INFORMATION SYSTEM (DPIS)'=>"dpis", 
+            'OUTPATIENT MANAGEMENT SYSTEM (OPMS)'=>"opms" ,
+            'APPOINTMENT SCHEDULING SYSTEM (TCA)'=>"tca" ,
+            'DOCUMENT SYSTEM (DocS)'=>"docs" ,
+            'LABS MANAGEMENT SYSTEM (LabS)'=>"labs" ,
+            'BILLING MANAGEMENT SYSTEM (BMS)'=>"bms" ,
+            'PHARMACY MANAGEMENT SYSTEM (PMS)'=>"pms" ,
+            'MESSAGING SYSTEM (MASS)'=>"mass" ,
+            'WEB PORTAL (WEB)'=>"web" 
+            },
+          params[:apitype]) %>
+          
+      </div>
       </li>
     </ol>
   </div>
   <div class="row">
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    
     <table class="table table-hover table-bordered table-striped">
       <thead>
           <tr>
             <th>No.</th>
-            <th>URL</th>
             <th>Method</th>
-            <th>Description</th>
+            <th>Path</th>
+            <th>URL</th>
           </tr>
       </thead>
       <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>/pis/patient/[:mrn]</td>
-            <td>GET</td>
-            <td>Get Patient Information</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>/pis/search/mykad/[:mykad]</td>
-            <td>GET</td>
-            <td>Search Patient by Mykad No</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>/pis/search/name/[:name]</td>
-            <td>GET</td>
-            <td>Search Patient by Name</td>
-          </tr>
+        <%
+          cnt=0
+          Rails.application.routes.routes.each do |route|
+          #route = route.path.spec.to_s
+
+            if route.path.spec.to_s.starts_with?('/api/'+params[:apitype])
+              
+              url = 
+        %>
+              <tr>
+                <th scope="row"><%=cnt+=1%></th>
+                <td><%= /GET|POST|PUT|DELETE/.match(route.verb.to_s)%></td>
+                <td><%=route.path.spec%></td>
+                <td><%=link_to 'Go To Link',@coreurl+route.path.spec.to_s,:class=> 'btn-xs btn btn-info',:target=>'_blank' %></td>
+              </tr>
+        <%
+             end
+          end
+        %>
       </tbody>
     </table>
 
-    <%= link_to :logout, destroy_user_session_path, :method => :delete %>
+    
   </div>
 </div>

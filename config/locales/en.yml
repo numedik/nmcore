@@ -20,4 +20,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  title: "NuMedik Core API"
+  coreinfo:
+    id: "ID"
+    es: "Elastic Search"
+    url: "URL"

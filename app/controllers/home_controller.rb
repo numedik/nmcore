@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def landing
-
+    @coreurl = 'https://'+NMID+'.nmcore.numedik.com'
   end
 
   def doorkeeper
