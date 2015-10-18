@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   def landing
     @coreurl = 'https://'+NMID+'.nmcore.numedik.com'
+    @apitype = params[:apitype] || 'dpis' #default to dpis
   end
 
   def doorkeeper

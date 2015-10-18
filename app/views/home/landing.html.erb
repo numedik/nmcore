@@ -37,7 +37,7 @@
             'MESSAGING SYSTEM (MASS)'=>"mass" ,
             'WEB PORTAL (WEB)'=>"web" 
             },
-          params[:apitype]) %>
+          @apitype) %>
           
       </div>
       </li>
@@ -60,7 +60,7 @@
           Rails.application.routes.routes.each do |route|
           #route = route.path.spec.to_s
 
-            if route.path.spec.to_s.starts_with?('/api/'+params[:apitype])
+            if route.path.spec.to_s.starts_with?('/api/'+@apitype)
               
               url = 
         %>
