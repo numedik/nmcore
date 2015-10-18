@@ -25,3 +25,4 @@ en:
     id: "ID"
     es: "Elastic Search"
     url: "URL"
+    memory: "Memory"

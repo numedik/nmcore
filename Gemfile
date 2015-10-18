@@ -53,3 +53,4 @@ gem 'select2-rails'
 
 # ElasticSearch
 gem 'tire'
+gem 'get_process_mem'
