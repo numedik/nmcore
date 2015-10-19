@@ -147,7 +147,7 @@ class LookupController < ApplicationController
         @rs = Gstcode.all
     
     when 'doctor'
-        @rs = User.where(:role_id=>Role.where(:code => 'MD').first.id)
+      @rs = User.where(:role_id=>Role.where(:code => 'MD').first.id, :userstat_id=>Userstat.where(:code=>'A').first.id)
 
     end
     
