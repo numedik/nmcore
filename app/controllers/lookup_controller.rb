@@ -145,8 +145,13 @@ class LookupController < ApplicationController
 
     when 'gstcode'
         @rs = Gstcode.all
+    
+    when 'doctor'
+        @rs = User.where(:role_id=>Role.where(:code => 'MD').first.id)
 
     end
+    
+    
 
     render formats: :json
   end
