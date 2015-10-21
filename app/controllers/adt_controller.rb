@@ -18,7 +18,7 @@ class AdtController < ApplicationController
       rs.save
       #save workflow. xsettle lagi
       
-      params['workflow'].each do |i,wk|
+      params['workflow'].each do |wk|
         wf = Workflow.new
         wf.treatment_id = rs.id
         wf.workorder_id = wk['workorder_id'].to_i
