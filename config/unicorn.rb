@@ -5,9 +5,9 @@ pid "/#{appname}/pids/unicorn.pid"
 stderr_path "/#{appname}/log/unicorn.log"
 stdout_path "/#{appname}/log/unicorn.log"
 #listen "/tmp/unicorn.#{appname}.sock", :backlog => 64
-listen 3000, :tcp_nopush => true
+listen ENV['EXPOSEPORT'], :tcp_nopush => true
 
-worker_processes Integer(ENV["WEB_CONCURRENCY"] || 4)
+worker_processes Integer(ENV["WEB_CONCURRENCY"] || 1)
 timeout 60
 preload_app true
 

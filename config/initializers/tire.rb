@@ -9,4 +9,3 @@ if run
 end
 
 ES_ENABLED = run
-NMID = 'nm002'
