@@ -1,6 +1,6 @@
 default: &default
   adapter: mysql2
-  pool: 5
+  pool: 20
   username: <%= ENV['NMCORE_DATABASE_USER'] %>
   password: <%= ENV['NMCORE_DATABASE_PASSWORD'] %>
   host: <%= ENV['NMCORE_DATABASE_HOST'] %>
