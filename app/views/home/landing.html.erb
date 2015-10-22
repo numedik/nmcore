@@ -13,12 +13,17 @@
       <ul class="list-group">
         <li class="list-group-item list-group-item-success">
             <%=t('coreinfo.id')%> : <span class="btn btn-success btn-xs"><%=NMID%></span> | 
-            <%=t('coreinfo.es')%> : <%=link_to Tire::Configuration.url,Tire::Configuration.url,html_options = {:target => '_blank'}%> | 
-            <%=t('coreinfo.url')%> : <%= link_to @coreurl,@coreurl,html_options = {:target => '_blank'} %>
+            <%=t('coreinfo.url')%> : <%= link_to @coreurl,@coreurl,html_options = {:target => '_blank'} %> |
+            <%=t('coreinfo.exposeport')%> : <span class="btn btn-primary btn-xs"><%=ENV['EXPOSEPORT']%></span> |
+          <%=t('coreinfo.concurrency')%> : <span class="btn btn-primary btn-xs"><%=ENV['WEB_CONCURRENCY']%></span>
           <%= link_to :logout, destroy_user_session_path, :method => :delete, :class => 'pull-right btn btn-xs btn-danger' %>
         </li>
         <li class="list-group-item list-group-item-info">
           <%=t('coreinfo.memory')%> : <span class="btn btn-primary btn-xs"><%=@railsmem.mb.round(2)%> MB</span> | 
+          <%=t('coreinfo.memcached')%> : 
+            <span class="btn btn-info btn-xs"><%=ENV['MEMCACHEDHOST']%></span> | 
+          <%=t('coreinfo.es')%> : <%=link_to Tire::Configuration.url,Tire::Configuration.url,html_options = {:target => '_blank'}%> | 
+
           <%=t('coreinfo.uptime')%> : <span class="label label-info"><%=@uptime%></span>
         </li>
         

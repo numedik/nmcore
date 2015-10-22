@@ -4,9 +4,6 @@ class HomeController < ApplicationController
     @apitype = params[:apitype] || 'dpis' #default to dpis
     @railsmem = GetProcessMem.new
     
-    pidmemcached = `ps -C memcached -o pid=`
-    @memcachedmem = GetProcessMem.new pidmemcached
-    
     @uptime = `uptime`
   end
 

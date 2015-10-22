@@ -26,3 +26,5 @@ en:
     es: "Elastic Search"
     url: "URL"
     memory: "Memory"
+    exposeport: "Port"
+    concurrency: "Worker"
