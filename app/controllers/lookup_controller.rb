@@ -10,6 +10,17 @@ class LookupController < ApplicationController
     respond_with current_resource_owner
   end
 
+  def bulkrequest
+    @res = {}
+    @models = params[:res].split(',')
+    params[:requesttype] = :bulk
+    @models.each do |res|
+      params[:lookupmodel] = res
+      @res[res.to_sym] = dblookup
+    end
+    render formats: :json
+  end
+  
   def dblookup
 
     case params[:lookupmodel]
@@ -107,21 +118,21 @@ class LookupController < ApplicationController
         @rs = Workflowtemplate.all
 
     when 'workflowtemplateitem'
+        @rs = Workflowtemplateitem.includes(:workorder)
         if params[:tplid]
-          @rs = Workflowtemplateitem.includes(:workorder)
-                  .where( workflowtemplate_id: params[:tplid] ).each.map do |tplitem|
-          { 
-            id: tplitem.id, 
-            workorder: tplitem.workorder, 
-            sequence: tplitem.sequence,
-            created_at: tplitem.created_at,
-            updated_at: tplitem.updated_at
-          }
-          end
-        else
-          @rs = Workflowtemplateitem.all
+          @rs = @rs
+            .where( workflowtemplate_id: params[:tplid] )
         end
-
+        
+        @rs = @rs.each.map do |tplitem| { 
+          id: tplitem.id, 
+          workflowtemplate_id: tplitem.workflowtemplate_id,
+          workorder: tplitem.workorder, 
+          sequence: tplitem.sequence,
+          created_at: tplitem.created_at,
+          updated_at: tplitem.updated_at
+        } end
+        
     when 'workflowstat'
         @rs = Workflowstat.all
 
@@ -151,8 +162,10 @@ class LookupController < ApplicationController
 
     end
     
-    
-
-    render formats: :json
+    if params[:requesttype] == :bulk
+      return @rs
+    else
+      render formats: :json
+    end
   end
 end

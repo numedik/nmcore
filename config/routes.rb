@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     scope :lookup do
       get ':lookupmodel' => "lookup#dblookup"
     end
+    get '__bulklookup' => "lookup#bulkrequest"
 
     #list of module
     
