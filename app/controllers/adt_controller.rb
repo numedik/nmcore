@@ -18,11 +18,11 @@ class AdtController < ApplicationController
       rs.save
       #save workflow. xsettle lagi
       
-      params['workflow'].each do |wk|
+      params['workflow'].each do |wk, i|
         wf = Workflow.new
         wf.treatment_id = rs.id
-        wf.workorder_id = wk['workorder_id'].to_i
-        wf.sequenceorder = wk['sequence'].to_i
+        wf.workorder_id = wk
+        wf.sequenceorder = i
         wf.assigner_id = rs.registrar_id
 
         wf.save
