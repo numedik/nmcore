@@ -32,10 +32,11 @@ Rails.application.routes.draw do
 
     scope 'adt' do 
       post '/admit' => 'adt#admit'  
+      get '/active-patient' => 'adt#list_active_patient'
     end
     
     scope 'opms' do
-      get '/active-patient' => 'adt#list_active_patient'
+      
     end
 
     scope 'tca' do
