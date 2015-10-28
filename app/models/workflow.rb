@@ -4,7 +4,7 @@ class Workflow < ActiveRecord::Base
   belongs_to :assignee, :foreign_key => :assignee_id, :class => :user
   
   belongs_to :workorder
-  has_one :workflowstat
+  belongs_to :workflowstat
   belongs_to :treatment
   
   
