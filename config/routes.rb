@@ -35,8 +35,7 @@ Rails.application.routes.draw do
     end
     
     scope 'opms' do
-      get '/active-treatment-patient' => 'treatments#active_treatment_patient'
-      get '/list-treatment-patient' => 'treatments#list_past_treatment'
+      get '/active-patient' => 'adt#list_active_patient'
     end
 
     scope 'tca' do

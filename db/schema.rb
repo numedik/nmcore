@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150828111447) do
+ActiveRecord::Schema.define(version: 20151028054918) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "code",           limit: 255
@@ -38,6 +38,21 @@ ActiveRecord::Schema.define(version: 20150828111447) do
     t.boolean  "disabled",   limit: 1,   default: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+  end
+
+  create_table "activequeues", primary_key: "treatment_id", force: :cascade do |t|
+    t.integer  "patient_id",       limit: 4,   null: false
+    t.string   "patientname",      limit: 255, null: false
+    t.string   "workorderprev",    limit: 255
+    t.string   "workordercurrent", limit: 255
+    t.string   "statprev",         limit: 255
+    t.string   "statcurrent",      limit: 255
+    t.string   "user",             limit: 255
+    t.string   "sn",               limit: 255, null: false
+    t.string   "mrn",              limit: 255, null: false
+    t.string   "gender",           limit: 255
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "appointments", force: :cascade do |t|
@@ -234,62 +249,69 @@ ActiveRecord::Schema.define(version: 20150828111447) do
     t.datetime "updated_at",                               null: false
   end
 
+  create_table "drugcategories", force: :cascade do |t|
+    t.string   "code",       limit: 255
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "drugdosages", force: :cascade do |t|
     t.string   "code",       limit: 255
     t.string   "name",       limit: 255
-    t.boolean  "disabled",   limit: 1,   default: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "drugdurations", force: :cascade do |t|
     t.string   "code",       limit: 255
     t.string   "name",       limit: 255
-    t.integer  "multiplier", limit: 4,   default: 1
-    t.boolean  "disabled",   limit: 1,   default: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.float    "multiply",   limit: 24
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "drugfrequencies", force: :cascade do |t|
     t.string   "code",       limit: 255
     t.string   "name",       limit: 255
-    t.float    "multiplier", limit: 24,  default: 1.0
-    t.boolean  "disabled",   limit: 1,   default: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.float    "multiply",   limit: 24
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "drugprns", force: :cascade do |t|
+    t.string   "code",       limit: 255
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "drugprocedures", force: :cascade do |t|
     t.string   "code",       limit: 255
     t.string   "name",       limit: 255
-    t.boolean  "disabled",   limit: 1,   default: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "drugroutes", force: :cascade do |t|
     t.string   "code",       limit: 255
     t.string   "name",       limit: 255
-    t.boolean  "disabled",   limit: 1,   default: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "drugstrengths", force: :cascade do |t|
     t.string   "code",       limit: 255
     t.string   "name",       limit: 255
-    t.boolean  "disabled",   limit: 1,   default: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "drugtypes", force: :cascade do |t|
     t.string   "code",       limit: 255
     t.string   "name",       limit: 255
-    t.boolean  "disabled",   limit: 1,   default: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "genders", force: :cascade do |t|
@@ -594,7 +616,7 @@ ActiveRecord::Schema.define(version: 20150828111447) do
     t.integer  "rnstat_id",            limit: 4
     t.integer  "designation_id",       limit: 4
     t.string   "relativename",         limit: 255
-    t.string   "relationrelation",     limit: 255
+    t.string   "relativerelation",     limit: 255
     t.string   "relativeadd",          limit: 255
     t.string   "relativetel",          limit: 255
     t.integer  "registrar_id",         limit: 4

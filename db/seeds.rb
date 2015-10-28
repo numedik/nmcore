@@ -358,7 +358,8 @@ Workflowtemplateitem.create( id: 3, workflowtemplate_id: 1, workorder_id: 5,  se
 Workflowtemplateitem.create( id: 4, workflowtemplate_id: 1, workorder_id: 8,  sequence: 4)
 
 Workflowstat.create( id: 1, code: 'N', name: 'New', disabled: false)
-Workflowstat.create( id: 2, code: 'C', name: 'Completed', disabled: false)
+Workflowstat.create( id: 2, code: 'T', name: 'Taken', disabled: false)
+Workflowstat.create( id: 3, code: 'C', name: 'Completed', disabled: false)
 
 Role.create( id: 1, code: 'SYS', name: 'System Admin', disabled: false)
 Role.create( id: 2, code: 'ADM', name: 'Administrator', disabled: false)

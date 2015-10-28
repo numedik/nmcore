@@ -28,8 +28,14 @@ class AdtController < ApplicationController
         wf.save
       end
     
+      #after register new treatment, init record to active queue list
+      Workflow.init_queue(rs.id)
+      
       render :json => { status: 'success', treatment_id: rs.id, sn: rs.sn }
     end
   end
 
+  def list_active_patient
+    render :json => Activequeue.all
+  end
 end

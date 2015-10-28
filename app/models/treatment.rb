@@ -1,13 +1,13 @@
 class Treatment < ActiveRecord::Base
   belongs_to :treatmentnote
-  belongs_to :workflow
+  has_many :workflow
   belongs_to :labrequest
   belongs_to :billing
   belongs_to :plan
   belongs_to :treatmentstat
   
   has_one :discipline
-  has_one :patient
+  belongs_to :patient
   has_one :patienttype
     
   belongs_to :doctor, :foreign_key => :doctor_id, :class => :user
@@ -15,7 +15,7 @@ class Treatment < ActiveRecord::Base
 
   before_create :init_default
   before_destroy 'self.class.delete_all "treatment_id = #{id}"'
-  
+    
   private
     def init_default
       run2 = Runningnumber.where(:code=>'SN').first

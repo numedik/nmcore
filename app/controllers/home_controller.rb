@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def landing
-    @coreurl = 'https://'+NMID+'.nmcore.numedik.com'
+    @coreurl = 'https://'+NMID+'.core.numedik.com'
     @apitype = params[:apitype] || 'dpis' #default to dpis
     @railsmem = GetProcessMem.new
     
