@@ -36,6 +36,15 @@ class AdtController < ApplicationController
   end
 
   def list_active_patient
-    render :json => Activequeue.all
+    act = params[:act] || 'all'
+    
+    rsx = Hash.new
+    Workorder.order(:id).each do |wo| rsx[wo.name] = Array.new end
+    
+    Activequeue.all.each do |rs|
+      rsx[rs.workordercurrent ].push rs
+    end
+    
+    render :json => rsx
   end
 end
