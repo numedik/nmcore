@@ -16,9 +16,15 @@ class Workflow < ActiveRecord::Base
   
   def self.init_queue(tid)
     t = Treatment.find(tid)
-    w = Workflow.active.where(:treatment_id=>t.id).currentworkorder.first
     
+    #set workorder registration to complete
+    wx = Workflow.where(:treatment_id=>tid, :workorder_id=>1).first
+    wx.workflowstat_id = Workflowstat.where(:code => 'C').first.id
+    wx.save
     
+    #get current workorder
+    w = Workflow.get_current_workorder(tid)
+  
     rs = Activequeue.new
     rs.treatment_id = t.id
     rs.patient_id = t.patient_id
@@ -32,6 +38,9 @@ class Workflow < ActiveRecord::Base
     
   end
   
+  def self.get_current_workorder(tid)
+    return Workflow.active.where(:treatment_id=>tid).currentworkorder.first
+  end
   
   private
     def init_default
