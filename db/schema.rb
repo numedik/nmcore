@@ -41,19 +41,20 @@ ActiveRecord::Schema.define(version: 20151030050024) do
   end
 
   create_table "activequeues", primary_key: "treatment_id", force: :cascade do |t|
-    t.integer  "patient_id",       limit: 4,   null: false
-    t.string   "patientname",      limit: 255, null: false
-    t.string   "workorderprev",    limit: 255
-    t.string   "workordercurrent", limit: 255
-    t.string   "statprev",         limit: 255
-    t.string   "statcurrent",      limit: 255
-    t.string   "user",             limit: 255
-    t.string   "sn",               limit: 255, null: false
-    t.string   "mrn",              limit: 255, null: false
-    t.string   "gender",           limit: 255
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.string   "clismodule",       limit: 255
+    t.integer  "patient_id",         limit: 4,   null: false
+    t.string   "patientname",        limit: 255, null: false
+    t.string   "workorderprev",      limit: 255
+    t.string   "workordercurrent",   limit: 255
+    t.string   "statprev",           limit: 255
+    t.string   "statcurrent",        limit: 255
+    t.string   "user",               limit: 255
+    t.string   "sn",                 limit: 255, null: false
+    t.string   "mrn",                limit: 255, null: false
+    t.string   "gender",             limit: 255
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "clismodule",         limit: 255
+    t.integer  "currentworkflow_id", limit: 4
   end
 
   create_table "appointments", force: :cascade do |t|

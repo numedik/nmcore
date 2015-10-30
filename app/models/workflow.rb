@@ -12,7 +12,14 @@ class Workflow < ActiveRecord::Base
   
   scope :active, -> { where(workflowstat_id: Workflowstat.where(:code => 'N').first.id) }
   scope :currentworkorder, -> { order(sequenceorder: :asc)}
+
+  def sign_in_patient
+    self.workflowstat_id = Workflowstat.where(:code => 'T').first.id
+  end
   
+  def sign_off_patient
+    self.workflowstat_id = Workflowstat.where(:code => 'C').first.id
+  end
   
   def self.init_queue(tid)
     t = Treatment.find(tid)
@@ -35,8 +42,14 @@ class Workflow < ActiveRecord::Base
       rs.mrn = t.patient.mrn
       rs.gender = t.patient.gender.code
       rs.clismodule = w.workorder.clismodule
+      rs.currentworkflow_id = w.id
+      
     rs.save
     
+  end
+  
+  def self.get_next_workorder(tid)
+    return Workflow.active.where(:treatment_id=>tid).currentworkorder.second rescue nil
   end
   
   def self.get_current_workorder(tid)

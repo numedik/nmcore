@@ -45,4 +45,54 @@ class AdtController < ApplicationController
     
     render :json => rsx
   end
+  
+  def sign_patient
+    aq = Activequeue.find(params[:tid])
+    if aq.clismodule == params[:clismodule]
+      
+      wf = Workflow.find(aq.currentworkflow_id)
+      case params[:signaction]
+        when 'in'
+          wf.sign_in_patient
+          wf.save
+          
+          aq.statprev = aq.statcurrent
+          aq.statcurrent = wf.workflowstat.name
+          aq.save
+          render :json => aq
+        
+        when 'off'
+          wf.sign_off_patient
+          wf.save
+        
+          aq.workorderprev = aq.workordercurrent
+          aq.statprev = aq.statcurrent
+        
+          #dapatkan next workorder
+          newwf = Workflow.get_next_workorder(params[:tid])
+          if !newwf.nil?
+            #kalau ada next WO, set params
+            aq.workordercurrent = newwf.workorder.name
+            aq.statcurrent = newwf.workflowstat.name
+            aq.workflow_id = newwf.id
+            aq.clismodule = newwf.workflow.clismodule
+            aq.save
+            render :json => aq
+          else
+            #kalau xde next WO, delete ajo dari Activequeue
+            
+            tmp = aq
+            tmp.clismodule = 'RN' #temporary set to RN for discharge
+            
+            aq.delete
+            render :json => tmp
+          end
+        
+      end
+      
+    else
+          render :json => {:stat =>'Not Valid', :params => params}
+
+    end
+  end
 end

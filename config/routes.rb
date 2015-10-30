@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     scope 'adt' do 
       post '/admit' => 'adt#admit'  
       get '/active-patient' => 'adt#list_active_patient'
+      get '/sign/:signaction/:clismodule/:tid' => 'adt#sign_patient'
     end
     
     scope 'opms' do
