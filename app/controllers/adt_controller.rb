@@ -35,9 +35,7 @@ class AdtController < ApplicationController
     end
   end
 
-  def list_active_patient
-    act = params[:act] || 'all'
-    
+  def list_active_patient    
     rsx = Hash.new
     Workorder.order(:id).each do |wo| rsx[wo.name] = Array.new end
     

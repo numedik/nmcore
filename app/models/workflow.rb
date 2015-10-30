@@ -34,6 +34,7 @@ class Workflow < ActiveRecord::Base
       rs.sn = t.sn
       rs.mrn = t.patient.mrn
       rs.gender = t.patient.gender.code
+      rs.clismodule = w.workorder.clismodule
     rs.save
     
   end
