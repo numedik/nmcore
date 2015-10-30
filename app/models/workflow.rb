@@ -26,14 +26,14 @@ class Workflow < ActiveRecord::Base
     w = Workflow.get_current_workorder(tid)
   
     rs = Activequeue.new
-    rs.treatment_id = t.id
-    rs.patient_id = t.patient_id
-    rs.patientname = t.patient.fullname
-    rs.workordercurrent = w.workorder.name
-    rs.statcurrent = w.workflowstat.name
-    rs.sn = t.sn
-    rs.mrn = t.patient.mrn
-    rs.gender = t.patient.gender.code
+      rs.treatment_id = t.id
+      rs.patient_id = t.patient_id
+      rs.patientname = t.patient.fullname
+      rs.workordercurrent = w.workorder.name
+      rs.statcurrent = w.workflowstat.name
+      rs.sn = t.sn
+      rs.mrn = t.patient.mrn
+      rs.gender = t.patient.gender.code
     rs.save
     
   end
