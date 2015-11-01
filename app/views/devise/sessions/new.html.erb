@@ -135,7 +135,7 @@ $(document).ready(function(){
           <center><h3 class="form-title">Sign in to your account</h3></center>
           <div class="list-group">
             <div class="list-group-item">
-              <%= f.text_field :username, :autofocus => true, :class=>"form-control placeholder-no-fix",:autocomplete=>:off,:placeholder=>"username", :"data-required" => true %>
+              <%= f.email_field :email, :autofocus => true, :class=>"form-control placeholder-no-fix",:autocomplete=>:off,:placeholder=>"username", :"data-required" => true %>
             </div>
             <div class="list-group-item">
               <%= f.password_field :password, :class=>"form-control placeholder-no-fix",:autocomplete=>:off,:placeholder=>"Password",  :"data-required" => true%>
