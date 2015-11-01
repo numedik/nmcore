@@ -1,26 +1,183 @@
-<h2>Log in</h2>
+<% content_for :css do %>
+    <link href='http://fonts.googleapis.com/css?family=Maven+Pro:700' rel='stylesheet' type='text/css'>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+    <style>
+        .logotxt {
+            font-family: 'Maven Pro';
+            font-size: 17pt;
+        }
+        .logotxt img {
+            max-height: none;
+        }
+        .logo-title {
+          font-size: 30px;
+          font-weight: 800;
+          position: relative;
+          top: -10px;
+        }
+        input {
+            border-color: transparent !important;
+        }
+        .checkbox {
+            margin-top: 5px;
+        }
+      .aside-xl {
+        margin-top: 50px;
+        width: 360px;
+      }
+      .m-b-lg {
+        margin-bottom: 30px;
+      }
+      
+      .navbar-header .navbar-brand + .btn {
+        right: 0;
+        top: 0;
+        left: auto;
+      }
+      .navbar-brand {
+        float: none;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 700;
+        height: auto;
+        line-height: 50px;
+        display: inline-block;
+        padding: 0 15px;
+        
+        width:100%;
+      }
+      .wrapper strong {
+        color: red;
+      }
+      .navbar-brand img {
+        margin-left: auto;
+        margin-right: auto;
+        max-height: 80px;
+        margin-top: -4px;
+        vertical-align: middle;
+      }
+      .line {
+        *width: 100%;
+        height: 2px;
+        margin: 10px 0;
+        font-size: 0;
+        overflow: hidden;
+      }
+      .line-dashed {
+        border-style: dashed !important;
+        background-color: transparent;
+        border-width: 0;
+      }
+      .form-title {
+        font-size: 19px;
+      }
+      .form-control:focus{
+        border-color: transparent !important;
+        outline: 0;
+        -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075);
+      }
+      .form-control {
+        font-size: 20px;
+        border: 0;
+        -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075);
+        transition: initial;
+        -webkit-transition: initial;
+      }
+      .signinbutton {
+        width: 100%;
+        margin-top:10px;
+      }
+      .list-group {
+        -webkit-box-shadow: 0 0px 0px rgba(0, 0, 0, 0.075);
+        box-shadow: 0 0px 0px rgba(0, 0, 0, 0.075);
+      }
+    </style>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<% content_for :js do %>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $.backstretch([
+      "http://www.hdwallpaperscool.com/wp-content/uploads/2015/05/malaysia-hd-wallpaper-for-desktop-background-download-malaysia-images.jpeg"
+    ,  "http://images7.alphacoders.com/304/304167.jpg"
+    ,  "http://wallpoper.com/images/00/37/30/49/malaysia-kuala_00373049.jpg"
+    ,  "http://hdwallpapers.cat/wallpaper/famous_landmark_of_malaysia_kuala_lumpur_hd-wallpaper-1114556.jpg"
+    ,  "http://thewallpaperhost.com/wp-content/uploads/wallpaper-nature-3d1.jpg"
+    , "http://hdw.datawallpaper.com/nature/wetls-in-malaysia-at-dusk-hd-wallpaper-336616.jpg"
+  ], {duration: 5000, fade: 750});
+});
+</script>
+<% end %>
+
+<section id="content" class="m-t-lg wrapper-md animated fadeInUp">
+  <div class="container aside-xl">
+    <section class="m-b-lg" style="padding: 20px;background: rgba(255,255,255,0.8);border-radius: 5px;">
+      <span class="navbar-brand block logotxt">
+        <img src="/assets/numedik.png" >
+        <span class="logo-title">NuMedik</span>
+      </span>
+      <% unless flash.empty? %>
+          <header class="wrapper text-center"> 
+            <strong>
+            <% flash.each do |name, msg| %>
+                <%= msg %>
+            
+            <% end %>
+            </strong> 
+          </header>
+      <% end %>
+      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+
+          <center><h3 class="form-title">Sign in to your account</h3></center>
+          <div class="list-group">
+            <div class="list-group-item">
+              <%= f.text_field :username, :autofocus => true, :class=>"form-control placeholder-no-fix",:autocomplete=>:off,:placeholder=>"username", :"data-required" => true %>
+            </div>
+            <div class="list-group-item">
+              <%= f.password_field :password, :class=>"form-control placeholder-no-fix",:autocomplete=>:off,:placeholder=>"Password",  :"data-required" => true%>
+            </div>
+            <div class="text-left m-t">
+              <div class="col-md-6" style="padding-left: 5px">
+                <% if devise_mapping.rememberable? %>
+                <span class="checkbox i-checks">
+                  <label>  <%= f.check_box :remember_me %><i></i> Remember me </label>
+                </span>
+                <% end %>
+              </div>
+              <div class="col-md-6" style="padding-left: 0; padding-right: 0">
+                <button type="submit" class="btn btn-primary pull-right signinbutton">
+                  Sign in
+                </button>
+                
+              </div>
+
+            </div>
+            
+            <DIV class="text-left m-t m-b-lg" style="padding: 20px">
+            <div class="col-md-12" style="text-align: center; padding: 20px">
+                
+                <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+<% end -%>
+                
+            </div>
+            </DIV>
+            
+          </div>
+
+    <% end %>
+
+
+      <div class="line line-dashed"></div>
+
+
+    </section>
+  </div>
+</section>
+
+        
+
