@@ -96,10 +96,10 @@ class AdtController < ApplicationController
   def get_current_patient_info
     tid = Treatment.find params[:tid]
 
-    info = Hash.new
-    info[:treatment] = tid
-    info[:patient] = tid.patient
-
-    render :json => tid.to_json({:include => [:patient,:plan,:patienttype, :treatmentnote, :discipline, :treatmentstat, :workflows], :except => [:created_at,:updated_at] })
+    render json: tid, 
+      include: [
+        :patient, :plan, :patienttype, :discipline, :treatmentstat, :currentworkorder,
+        :workflowstat
+      ]
   end
 end

@@ -15,7 +15,15 @@ class Treatment < ActiveRecord::Base
 
   before_create :init_default
   before_destroy 'self.class.delete_all "treatment_id = #{id}"'
-
+  
+  def currentworkorder
+    w = workflows.active.first
+  end
+  
+  def workflowstat
+    currentworkorder.workflowstat
+  end 
+  
   private
     def init_default
       run2 = Runningnumber.where(:code=>'SN').first
