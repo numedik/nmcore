@@ -1,6 +1,6 @@
 class Treatment < ActiveRecord::Base
   belongs_to :treatmentnote
-  has_many :workflow
+  has_many :workflows
   belongs_to :labrequest
   belongs_to :billing
   belongs_to :plan
