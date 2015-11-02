@@ -29,9 +29,9 @@ class AdtController < ApplicationController
       end
     
       #after register new treatment, init record to active queue list
-      Workflow.init_queue(rs.id)
+      queue = Workflow.init_queue(rs.id)
       
-      render :json => { status: 'success', treatment_id: rs.id, sn: rs.sn }
+      render :json => queue
     end
   end
 

@@ -46,6 +46,7 @@ class Workflow < ActiveRecord::Base
       
     rs.save
     
+    rs
   end
   
   def self.get_next_workorder(tid)
