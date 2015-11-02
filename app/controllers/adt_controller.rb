@@ -99,7 +99,8 @@ class AdtController < ApplicationController
     info = Hash.new
     info[:treatment] = tid
     info[:patient] = tid.patient
+    info[:workflow] = tid.workflows.active
 
-    render :json => tid.to_json({:include => [:patient,:plan,:patienttype, :treatmentnote, :discipline, :treatmentstat], :except => [:created_at,:updated_at] })
+    render :json => tid.to_json({:include => [:patient,:plan,:patienttype, :treatmentnote, :discipline, :treatmentstat, :workflow], :except => [:created_at,:updated_at] })
   end
 end
