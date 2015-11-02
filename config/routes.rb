@@ -35,6 +35,7 @@ Rails.application.routes.draw do
       post '/admit' => 'adt#admit'
       get '/active-patient' => 'adt#list_active_patient'
       get '/sign/:signaction/:clismodule/:tid' => 'adt#sign_patient'
+      get '/current_visit/:tid' => 'adt#get_current_patient_info'
     end
 
     scope 'opms' do

@@ -34,7 +34,7 @@ class HomeController < ApplicationController
     userinfo = Hash.new
     userinfo[:user] = {id: current_user.id, fullname: current_user.fullname, email: current_user.email}
     userinfo[:clinic] = 'Klinik DuniaMedik'
-    userinfo[:workoder] = {id: current_user.workorder.id, code:current_user.workorder.code, name: current_user.workorder.name}
+    userinfo[:workorder] = {id: current_user.workorder.id, code:current_user.workorder.code, name: current_user.workorder.name}
     userinfo[:clock] = {clockin: '8:00 AM (23rd Oct 15)', duration: '4 Hours 32 Minutes', ipaddr: current_user.current_sign_in_ip}
     userinfo[:tca] = [
       {time: '8:30AM', name: 'TENGKU NOR ASIAH BT SAMSURI', mrn: 'MRN34453'},

@@ -3,7 +3,7 @@ class AdtController < ApplicationController
   #before_filter :doorkeeper_authorize!
 
   def admit
-    
+
     ActiveRecord::Base.transaction do
       rs = Treatment.new
 
@@ -17,7 +17,7 @@ class AdtController < ApplicationController
 
       rs.save
       #save workflow. xsettle lagi
-      
+
       params['workflow'].split(',').each_with_index do |wk, i|
         wf = Workflow.new
         wf.treatment_id = rs.id
@@ -27,47 +27,47 @@ class AdtController < ApplicationController
 
         wf.save
       end
-    
+
       #after register new treatment, init record to active queue list
       Workflow.init_queue(rs.id)
-      
+
       render :json => { status: 'success', treatment_id: rs.id, sn: rs.sn }
     end
   end
 
-  def list_active_patient    
+  def list_active_patient
     rsx = Hash.new
     Workorder.order(:id).each do |wo| rsx[wo.name] = Array.new end
-    
+
     Activequeue.all.each do |rs|
       rsx[rs.workordercurrent ].push rs
     end
-    
+
     render :json => rsx
   end
-  
+
   def sign_patient
     aq = Activequeue.find(params[:tid])
     if aq.clismodule == params[:clismodule]
-      
+
       wf = Workflow.find(aq.currentworkflow_id)
       case params[:signaction]
         when 'in'
           wf.sign_in_patient
           wf.save
-          
+
           aq.statprev = aq.statcurrent
           aq.statcurrent = wf.workflowstat.name
           aq.save
           render :json => aq
-        
+
         when 'off'
           wf.sign_off_patient
           wf.save
-        
+
           aq.workorderprev = aq.workordercurrent
           aq.statprev = aq.statcurrent
-        
+
           #dapatkan next workorder
           newwf = Workflow.get_next_workorder(params[:tid])
           if !newwf.nil?
@@ -80,19 +80,29 @@ class AdtController < ApplicationController
             render :json => aq
           else
             #kalau xde next WO, delete ajo dari Activequeue
-            
+
             tmp = aq
             tmp.clismodule = 'RN' #temporary set to RN for discharge
-            
+
             aq.delete
             render :json => tmp
           end
-        
+
       end
-      
+
     else
           render :json => {:stat =>'Not Valid', :params => params}
 
     end
+  end
+
+  def get_current_patient_info
+    tid = Treatment.find params[:tid]
+
+    info = Hash.new
+    info[:treatment] = tid
+    info[:patient] = tid.patient
+
+    render :json => tid.to_json({:include => [:patient,:plan,:patienttype, :treatmentnote, :discipline, :treatmentstat], :except => [:created_at,:updated_at] })
   end
 end
