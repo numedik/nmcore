@@ -1,9 +1,11 @@
 class HomeController < ApplicationController
+
+  before_filter :doorkeeper_authorize!
   def landing
     @coreurl = 'https://'+NMID+'.core.numedik.com'
     @apitype = params[:apitype] || 'dpis' #default to dpis
     @railsmem = GetProcessMem.new
-    
+
     @uptime = `uptime`
   end
 
@@ -25,5 +27,21 @@ class HomeController < ApplicationController
     )
     redirect_to url # will redirect the user to our API's sign in page
     # END Basic Usage Flow
+  end
+
+  def dashboard_info
+
+    userinfo = Hash.new
+    userinfo[:user] = {id: current_user.id, fullname: current_user.fullname, email: current_user.email}
+    userinfo[:clinic] = 'Klinik DuniaMedik'
+    userinfo[:workorder] = {id: current_user.workorder.id, code:current_user.workorder.code, name: current_user.workorder.name}
+    userinfo[:clock] = {clockin: '8:00 AM (23rd Oct 15)', duration: '4 Hours 32 Minutes', ipaddr: current_user.current_sign_in_ip}
+    userinfo[:tca] = [
+      {time: '8:30AM', name: 'TENGKU NOR ASIAH BT SAMSURI', mrn: 'MRN34453'},
+      {time: '9:30AM', name: 'MUHAMMAD ZAKI BIN ALI', mrn: 'MRN01253'},
+      {time: '10:00AM', name: 'NADIA ALIA BT RAMLI', mrn: 'MRN31253'}
+    ]
+    userinfo[:userlist] = User.where('id <> ?',current_user.id).select(:id,:fullname,:email)
+    render json: { info: userinfo }
   end
 end
