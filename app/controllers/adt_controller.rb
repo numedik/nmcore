@@ -99,7 +99,6 @@ class AdtController < ApplicationController
     info = Hash.new
     info[:treatment] = tid
     info[:patient] = tid.patient
-    info[:workorder] = Workflow.get_current_workorder(tid.id)
 
     render :json => tid.to_json({:include => [:patient,:plan,:patienttype, :treatmentnote, :discipline, :treatmentstat], :except => [:created_at,:updated_at] })
   end
