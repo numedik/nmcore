@@ -41,7 +41,7 @@ class HomeController < ApplicationController
       {time: '9:30AM', name: 'MUHAMMAD ZAKI BIN ALI', mrn: 'MRN01253'},
       {time: '10:00AM', name: 'NADIA ALIA BT RAMLI', mrn: 'MRN31253'}
     ]
-    userinfo[:userlist] = User.where('id <> ?',current_user.id).select(:id,:fullname,:email)
+    userinfo[:userlist] = User.where('users.id <> ?',current_user.id).joins(:workorder).select("users.id,users.fullname,users.email, workorders.name AS 'workordername'")
     render json: { info: userinfo }
   end
 end
