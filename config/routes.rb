@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   devise_for :users, controllers: {
-    sessions: 'sessions'
+    sessions: 'users/sessions'
   }
   use_doorkeeper
 
