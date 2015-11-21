@@ -17,6 +17,7 @@ User.create(username: 'abh', email: 'abh@numedik.com', password: 'abh' )
 Store.create(id:1, code: 'MS', name: 'Main Store')
 Accounttype.create(id:1, code: 'G', name: 'General')
 Plan.create(id:1, code: 'N', name: 'Normal Rate')
+Plan.create(id:2, code: 'P', name: 'Panel')
 
 
 Drugdosage.create( id: 1, code: 'TAB', name: 'TABLET', disabled: false)
@@ -125,8 +126,8 @@ Gender.create( id: 2, code: 'F', name: 'FEMALE', disabled: false)
 Gender.create( id: 3, code: 'U', name: 'UNKNOWN', disabled: false)
 
 Patienttype.create( id: 1, code: 'OP', name: 'Out Patient', disabled: false)
-Patienttype.create( id: 2, code: 'IP', name: 'In Patient', disabled: false)
-Patienttype.create( id: 3, code: 'AE', name: 'Emergency', disabled: false)
+#Patienttype.create( id: 2, code: 'IP', name: 'In Patient', disabled: false)
+#Patienttype.create( id: 3, code: 'AE', name: 'Emergency', disabled: false)
 Patienttype.create( id: 4, code: 'RT', name: 'Retails', disabled: false)
 
 Nationality.create( id: 1, code: 'MY', name: 'Malaysian', disabled: false)

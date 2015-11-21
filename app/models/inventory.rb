@@ -1,4 +1,4 @@
-class Inventory < ActiveRecord::Base
+class Inventory < ActiveRecord::Base  
   if ES_ENABLED
     include ActiveModel::Dirty
     include Tire::Model::Search
@@ -11,7 +11,7 @@ class Inventory < ActiveRecord::Base
         indexes :code,              :type     => :string
       end
   end
-  
+
   belongs_to :inventorytype
   belongs_to :drugtype
   belongs_to :drugstrength
