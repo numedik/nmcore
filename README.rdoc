@@ -1,5 +1,7 @@
 == Welcome to NuMedik Core Service
 
+{<img src="https://travis-ci.org/numedik/nmcore.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/numedik/nmcore]
+
 NuMedik Core Service is based on Rails & RDBMS Database (preffered MariaDB) with ElasticSearch Backend indexing
 
 * Rails version : 4.2
