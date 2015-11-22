@@ -29,6 +29,11 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     # raise session[:user_return_to]
-    session[:user_return_to] || root_path
+    if session[:user_return_to]
+      return session[:user_return_to]
+    else
+      super
+    end
+    
   end
 end
