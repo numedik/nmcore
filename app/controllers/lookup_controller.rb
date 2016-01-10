@@ -160,6 +160,15 @@ class LookupController < ApplicationController
     when 'doctor'
       @rs = User.where(:role_id=>Role.where(:code => 'MD').first.id, :userstat_id=>Userstat.where(:code=>'A').first.id)
 
+    when 'activepatient'
+      rsx = Hash.new
+      Workorder.order(:id).each do |wo| rsx[wo.name] = Array.new end
+
+      Activequeue.all.each do |rs|
+        rsx[rs.workordercurrent ].push rs
+      end
+      
+      @rs = rsx
     end
     
     if params[:requesttype] == :bulk

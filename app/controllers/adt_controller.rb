@@ -8,15 +8,15 @@ class AdtController < ApplicationController
 
       rs.patient_id = params[:patient_id]
       rs.patienttype_id = params[:patienttype_id]
-      rs.registrar_id = params[:registrar_id]
+      rs.registrar_id = current_user.id
       rs.plan_id = params[:plan_id]
       rs.discipline_id = params[:discipline_id]
       rs.doctor_id = params[:doctor_id]
       rs.legalcase = params[:legalcase]
 
-      rs.save
+      rs.save!
       #save workflow. xsettle lagi
-      params['workflow'].split(',').each_with_index do |wk, i|
+      params['workflow'].each_with_index do |wk, i|
         wf = Workflow.new
         wf.treatment_id = rs.id
         wf.workorder_id = wk
