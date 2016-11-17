@@ -34,10 +34,10 @@ class AdtController < ApplicationController
 
   def list_active_patient
     rsx = Hash.new
-    Workorder.order(:id).each do |wo| rsx[wo.name] = Array.new end
+    Workorder.order(:id).each do |wo| rsx[wo.code] = Array.new end
 
     Activequeue.all.each do |rs|
-      rsx[rs.workordercurrent ].push rs
+      rsx[rs.workordercurrent].push rs
     end
 
     render :json => rsx

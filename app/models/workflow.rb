@@ -36,7 +36,7 @@ class Workflow < ActiveRecord::Base
       rs.treatment_id = t.id
       rs.patient_id = t.patient_id
       rs.patientname = t.patient.fullname
-      rs.workordercurrent = w.workorder.name
+      rs.workordercurrent = w.workorder.code
       rs.statcurrent = w.workflowstat.name
       rs.sn = t.sn
       rs.mrn = t.patient.mrn
